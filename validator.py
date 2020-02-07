@@ -3,6 +3,7 @@ from datetime import datetime,date
 import pickle
 
 x= PrettyTable()
+y= PrettyTable()
 lines=[]
 outputlines=[]
 with open('Family-2-7-Feb-2020-544.ged') as line:
@@ -63,16 +64,26 @@ validpeople=[]
 
 for i in validlinesstring.split("INDI"):
     validpeople.append(i)
+for i in validpeople:
+    print(i)
 
 families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
 
+for i in families:
+    print(i)
+
+
 x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Death","Child","Spouse"]
-person=['N/A','N/A','N/A','N/A',True,'N/A',[],[]]
+a = set()
+b = set()
+person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A']
 
 for i in range(1, len(validpeople)):
     individual=validpeople[i].split("\n")
-    person=['N/A','N/A','N/A','N/A',True,'N/A',[],[]]
+    a = set()
+    b = set()
+    person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A']
     for j in range(0,len(individual)):
         
         if individual[j].split("|")[0]=='':
@@ -88,11 +99,25 @@ for i in range(1, len(validpeople)):
             person[4]=False
             person[5]=(individual[j+1].split("|")[-1])
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='FAMS':
-            person[7].append((individual[j].split("|")[-1]).replace('@',''))
+            b.add((individual[j].split("|")[-1]).replace('@',''))
+            person[7]=b
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='FAMC':
-            person[6].append((individual[j].split("|")[-1]).replace('@',''))
+            a.add((individual[j].split("|")[-1]).replace('@',''))
+            person[6]=a
         
     x.add_row(person)
+
+y.field_names = ["ID", "Married", "Divorced", 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children']
+c = set()
+person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A',c]
+
+for i in range(0, len(families)):
+    member = families[i].split("\n")
+    person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A',{'N/A'}]
+    print (member)
+    #for j in member:
+
+
 
 print (x)
 
