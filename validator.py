@@ -109,14 +109,16 @@ for i in range(1, len(validpeople)):
 
 y.field_names = ["ID", "Married", "Divorced", 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children']
 c = set()
-person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A',c]
+person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A']
 
 for i in range(0, len(families)):
     member = families[i].split("\n")
-    person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A',{'N/A'}]
-    print (member)
-    #for j in member:
-
+    c = set()
+    person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A']
+    print(member)
+    for j in member:
+        mb = j.split('|') 
+        print(mb)
 
 
 print (x)
