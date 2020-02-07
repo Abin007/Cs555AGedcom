@@ -68,12 +68,12 @@ families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
 
 x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Death","Child","Spouse"]
-person=['N/A','N/A','N/A','N/A',False,'N/A',[],[]]
+person=['N/A','N/A','N/A','N/A',True,'N/A',[],[]]
 
 
 for i in range(1, len(validpeople)):
     individual=validpeople[i].split("\n")
-    person=['N/A','N/A','N/A','N/A',False,'N/A',[],[]]
+    person=['N/A','N/A','N/A','N/A',True,'N/A',[],[]]
     for j in range(0,len(individual)):
         
         if individual[j].split("|")[0]=='':
@@ -86,7 +86,7 @@ for i in range(1, len(validpeople)):
             # person.append(today.year - born.year - ((today.month, today.day) < (born.month, born.day)))
             person[3]=(individual[j+1].split("|")[-1])
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='DEAT':
-            person[4]=True
+            person[4]=False
             person[5]=(individual[j+1].split("|")[-1])
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='FAMS':
             person[7].append((individual[j].split("|")[-1]).replace('@',''))
@@ -95,21 +95,9 @@ for i in range(1, len(validpeople)):
         
     x.add_row(person)
 
-y=pickle.dump( x, open( "x.p", "wb" ) )
+print (x)
 
-# for i in families:
-#     print (i)   
 
-# person=[]
-
-# for i in range(len(validlines)):
-#     if 'INDI' in validlines[i]:
-#         person.append(validlines[i].split("|")[-1])
-#         person.append(validlines[i+1].split("|")[-1])
-#         person.append(validlines[i+2].split("|")[-1])
-#         person.append(validlines[i+4].split("|")[-1])
-#         print(person)
-#         person=[]
 
 
     
