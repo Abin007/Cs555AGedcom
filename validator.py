@@ -70,7 +70,6 @@ validpeople[-1]=validpeople[-1].split("0|FAM")[0]
 x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Death","Child","Spouse"]
 person=['N/A','N/A','N/A','N/A',True,'N/A',[],[]]
 
-
 for i in range(1, len(validpeople)):
     individual=validpeople[i].split("\n")
     person=['N/A','N/A','N/A','N/A',True,'N/A',[],[]]
