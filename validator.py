@@ -74,16 +74,16 @@ for i in families:
     print(i)
 
 
-x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Death","Child","Spouse"]
+x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Age","Death","Child","Spouse"]
 a = set()
 b = set()
-person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A']
+person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A','N/A']
 
 for i in range(1, len(validpeople)):
     individual=validpeople[i].split("\n")
     a = set()
     b = set()
-    person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A']
+    person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A','N/A']
     for j in range(0,len(individual)):
         
         if individual[j].split("|")[0]=='':
@@ -93,17 +93,21 @@ for i in range(1, len(validpeople)):
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='SEX':
             person[2]=(individual[j].split("|")[-1])
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='BIRT':
-            # person.append(today.year - born.year - ((today.month, today.day) < (born.month, born.day)))
             person[3]=(individual[j+1].split("|")[-1])
+            born = datetime.strptime((individual[j+1].split("|")[-1]), '%d %b %Y')
+            today=date.today()
+            person[5]=(today.year - born.year - ((today.month, today.day) < (born.month, born.day)))
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='DEAT':
             person[4]=False
-            person[5]=(individual[j+1].split("|")[-1])
+            person[6]=(individual[j+1].split("|")[-1])
+            death=datetime.strptime((individual[j+1].split("|")[-1]), '%d %b %Y')
+            person[5]=(death.year - born.year - ((death.month, death.day) < (born.month, born.day)))
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='FAMS':
             b.add((individual[j].split("|")[-1]).replace('@',''))
-            person[7]=b
+            person[8]=b
         elif len(individual[j].split("|")) >1 and individual[j].split("|")[1]=='FAMC':
             a.add((individual[j].split("|")[-1]).replace('@',''))
-            person[6]=a
+            person[7]=a
         
     x.add_row(person)
 
