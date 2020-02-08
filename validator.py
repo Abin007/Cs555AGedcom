@@ -113,8 +113,8 @@ for i in range(0, len(families)):
     member = families[i].split("\n") 
     c = set()
     person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A'] 
-    for j in member: 
-        mb = j.split('|')
+    for j in range(0,len(member)): 
+        mb = member[j].split('|')
         if '' == mb[0]: #Getting all the ids 
             last = mb[-1].replace('@','') 
             person1[0] = last
@@ -139,9 +139,9 @@ for i in range(0, len(families)):
             c.add(last)
             person1[7] = c
         elif 'DIV' in mb: #Getting information about divorce details
-            person1[2] = 'Y'
+            person1[2] = member[j+1].split('|')[-1]
         elif 'MARR' in mb: #Getting information about Marriage details
-            person1[1] = 'Y'
+            person1[1] = member[j+1].split('|')[-1]
     y.add_row(person1)
 
 print ("Individuals")
