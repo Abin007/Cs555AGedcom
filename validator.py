@@ -64,15 +64,9 @@ validpeople=[]
 
 for i in validlinesstring.split("INDI"):
     validpeople.append(i)
-for i in validpeople:
-    print(i)
 
 families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
-
-for i in families:
-    print(i)
-
 
 x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Age","Death","Child","Spouse"]
 a = set()
@@ -119,15 +113,41 @@ for i in range(0, len(families)):
     member = families[i].split("\n")
     c = set()
     person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A']
-    print(member)
-    for j in member:
-        mb = j.split('|') 
-        print(mb)
+    for j in member: 
+        mb = j.split('|')
+        if '' == mb[0]:
+            last = mb[-1].replace('@','')
+            person1[0] = last
+        if 'HUSB' in mb:
+            last = mb[-1].replace('@','')
+            person1[3] = last
+            for row in x:
+                row.border = False
+                row.header = False
+                if (row.get_string(fields=["ID"]).strip()) == last:
+                    person1[4]=(row.get_string(fields=["Name"]).strip())
+        elif 'WIFE' in mb:
+            last = mb[-1].replace('@','')
+            person1[5] = last
+            for row in x:
+                row.border = False
+                row.header = False
+                if (row.get_string(fields=["ID"]).strip()) == last:
+                    person1[6]=(row.get_string(fields=["Name"]).strip())
+        elif 'CHIL' in mb:
+            last = mb[-1].replace('@','')
+            c.add(last)
+            person1[7] = c
+        elif 'DIV' in mb:
+            person1[2] = 'Y'
+        elif 'MARR' in mb:
+            person1[1] = 'Y'
+    y.add_row(person1)
 
-
+print ("Individuals")
 print (x)
-
-
+print ("Families")
+print (y)
 
 
     
