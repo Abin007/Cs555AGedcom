@@ -67,7 +67,7 @@ for i in validlinesstring.split("INDI"):
 
 families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
-
+#Getting and fetching all the details in Individuals Table
 x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Age","Death","Child","Spouse"]
 a = set()
 b = set()
@@ -104,21 +104,21 @@ for i in range(1, len(validpeople)):
             person[7]=a
         
     x.add_row(person)
-
+#Getting and Fetching all the details in Families Table
 y.field_names = ["ID", "Married", "Divorced", 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children']
 c = set()
 person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A']
 
 for i in range(0, len(families)):
-    member = families[i].split("\n")
+    member = families[i].split("\n") 
     c = set()
-    person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A']
+    person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A'] 
     for j in member: 
         mb = j.split('|')
-        if '' == mb[0]:
-            last = mb[-1].replace('@','')
+        if '' == mb[0]: #Getting all the ids 
+            last = mb[-1].replace('@','') 
             person1[0] = last
-        elif 'HUSB' in mb:
+        elif 'HUSB' in mb: #Getting all the Huband IDS and their respected name
             last = mb[-1].replace('@','')
             person1[3] = last
             for row in x:
@@ -126,7 +126,7 @@ for i in range(0, len(families)):
                 row.header = False
                 if (row.get_string(fields=["ID"]).strip()) == last:
                     person1[4]=(row.get_string(fields=["Name"]).strip())
-        elif 'WIFE' in mb:
+        elif 'WIFE' in mb: #Getting all the Huband IDS and their respected name
             last = mb[-1].replace('@','')
             person1[5] = last
             for row in x:
@@ -134,13 +134,13 @@ for i in range(0, len(families)):
                 row.header = False
                 if (row.get_string(fields=["ID"]).strip()) == last:
                     person1[6]=(row.get_string(fields=["Name"]).strip())
-        elif 'CHIL' in mb:
+        elif 'CHIL' in mb: #Getting all the Children IDS and storing it in variable of type set
             last = mb[-1].replace('@','')
             c.add(last)
             person1[7] = c
-        elif 'DIV' in mb:
+        elif 'DIV' in mb: #Getting information about divorce details
             person1[2] = 'Y'
-        elif 'MARR' in mb:
+        elif 'MARR' in mb: #Getting information about Marriage details
             person1[1] = 'Y'
     y.add_row(person1)
 
