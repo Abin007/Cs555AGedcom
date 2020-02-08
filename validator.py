@@ -118,7 +118,7 @@ for i in range(0, len(families)):
         if '' == mb[0]:
             last = mb[-1].replace('@','')
             person1[0] = last
-        if 'HUSB' in mb:
+        elif 'HUSB' in mb:
             last = mb[-1].replace('@','')
             person1[3] = last
             for row in x:
