@@ -54,6 +54,8 @@ for i in lines:
             outputlines.append("<-- "+word[0]+"|"+word[1]+"|"+"N"+"|"+" ".join(word[2:]))
         else:
             outputlines.append("<-- "+word[0]+"|"+word[1]+"|"+"N"+"|")
+
+#Getting all valid lines from the input
 validlines=[]
 for i in outputlines:
     if ('Y' in i.split("|")):
@@ -61,10 +63,10 @@ for i in outputlines:
 
 validlinesstring="\n".join(validlines)
 validpeople=[]
-
+#Splitting all the individual records 
 for i in validlinesstring.split("INDI"):
     validpeople.append(i)
-
+#Getting  all the family records 
 families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
 #Getting and fetching all the details in Individuals Table
