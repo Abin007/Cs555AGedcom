@@ -152,4 +152,31 @@ print ("Families")
 print (y)
 
 
+print( "Story ID -  US23 Unique name and birth date");
+names=[]
+dob=[]
+id=[]
+
+for row in x:
+    row.border = False
+    row.header = False
+    names.append(row.get_string(fields=["Name"]).strip().replace('/',''))
+    dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+    id.append(row.get_string(fields=["ID"]).strip().replace('/',''))
+warning=0
+error=0
+for i in range(0,len(names)):
+    for j in range(i+1, len(names)):
+        if(names[i]==names[j]):
+            if(dob[i]==dob[j]):
+                print(f"Error : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]}")
+                error=error+1
+
+            else:
+                print(f"Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
+                warning=warning+1
+
+if warning==0 and error==0:
+    print("No errors found")
+
     
