@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 from datetime import datetime,date
 import pickle
+import re
 
 x= PrettyTable()
 y= PrettyTable()
@@ -194,4 +195,11 @@ for row in y:
     fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
     family[id]=fam
 
-print(family)
+for i in family:
+    childern= family[i][-1]
+    patterns= r'\w+'
+    if childern != 'N/A':
+        match= re.findall(patterns, childern)
+        print (match)
+
+
