@@ -152,7 +152,7 @@ print (x)
 print ("Families")
 print (y)
 
-
+#___________________________________________________________________________________________________________
 print( "Story ID -  US23 Unique name and birth date")
 names=[]
 dob=[]
@@ -180,7 +180,7 @@ for i in range(0,len(names)):
 if warning==0 and error==0:
     print("No errors found")
 
-    
+   
 print( "Story ID -  US25 Unique first names in families")
 family={}
 
@@ -203,3 +203,54 @@ for i in family:
         print (match)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#__________________________________________________________________________________________________________________________
