@@ -152,7 +152,7 @@ print ("Families")
 print (y)
 
 
-print( "Story ID -  US23 Unique name and birth date");
+print( "Story ID -  US23 Unique name and birth date")
 names=[]
 dob=[]
 id=[]
@@ -180,3 +180,18 @@ if warning==0 and error==0:
     print("No errors found")
 
     
+print( "Story ID -  US25 Unique first names in families")
+family={}
+
+
+for row in y:
+    row.border = False
+    row.header = False
+    fam=[]
+    fam.append(row.get_string(fields=["Husband Name"]).strip().replace('/','').split(" ")[0])
+    fam.append(row.get_string(fields=["Wife Name"]).strip().replace('/','').split(" ")[0])
+    id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+    fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+    family[id]=fam
+
+print(family)
