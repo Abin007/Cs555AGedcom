@@ -200,7 +200,28 @@ for i in family:
     patterns= r'\w+'
     if childern != 'N/A':
         match= re.findall(patterns, childern)
-        print (match)
+        child=[]
+        if (match[0]!='NA'):
+            for j in range(0,len(match)):
+                for row in x:
+                    row.border = False
+                    row.header = False
+                    if (row.get_string(fields=["ID"]).strip()) == match[j]:
+                        child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0])
+                    
+        family[i].pop()
+        family[i]=family[i]+child
+error=0
+for i in family:
+    uniquefamily=list(set(family[i]))
+    if(len(family[i])!=len(uniquefamily)):
+        error=1
+        print (f"family Id {i} has same name - {family[i]}")
+if(error==0):
+    print("No error detected.")
+
+
+
 
 
 
