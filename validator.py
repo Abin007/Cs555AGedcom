@@ -220,8 +220,11 @@ if(error==0):
 #___________________________________________________________________________________________________
 
 print("Story ID - US30 List Living Married")
-marriedPeople = []
+
+livingMarried = PrettyTable()
+livingMarried.field_names = ['Husband ID', 'Husband Name', 'Wife ID', 'Wife Name']
 for row in y:
+    marriedPeople = []
     row.border = False
     row.header = False
     if (row.get_string(fields=["Married"]).strip()) != 'N/A' and (row.get_string(fields=["Divorced"]).strip()) == 'N/A':
@@ -235,9 +238,14 @@ for row in y:
                 if (row1.get_string(fields=["ID"]).strip()) == Hid or (row1.get_string(fields=["ID"]).strip()) == Wid:
                     flag=1
         if flag == 0:
-            marriedPeople.append((row.get_string(fields=["ID"]).strip()))
+            marriedPeople.append((row.get_string(fields=["Husband ID"]).strip()))
+            marriedPeople.append((row.get_string(fields=["Husband Name"]).strip()))
+            marriedPeople.append((row.get_string(fields=["Wife ID"]).strip()))
+            marriedPeople.append((row.get_string(fields=["Wife Name"]).strip()))
+            livingMarried.add_row(marriedPeople)
 
-print (marriedPeople)
+print ('List of Living Married is -->')
+print (livingMarried)
                     
             
 
