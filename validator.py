@@ -56,10 +56,6 @@ for i in lines:
         else:
             outputlines.append("<-- "+word[0]+"|"+word[1]+"|"+"N"+"|")
 
-<<<<<<< HEAD
-=======
-#Getting all valid lines from the input
->>>>>>> 1f257d70eb7854fc8219e8fe628ff0fdaf78fd2b
 validlines=[]
 for i in outputlines:
     if ('Y' in i.split("|")):
