@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 from datetime import datetime,date
 import pickle
+import re
 
 x= PrettyTable()
 y= PrettyTable()
@@ -55,6 +56,10 @@ for i in lines:
         else:
             outputlines.append("<-- "+word[0]+"|"+word[1]+"|"+"N"+"|")
 
+<<<<<<< HEAD
+=======
+#Getting all valid lines from the input
+>>>>>>> 1f257d70eb7854fc8219e8fe628ff0fdaf78fd2b
 validlines=[]
 for i in outputlines:
     if ('Y' in i.split("|")):
@@ -62,10 +67,10 @@ for i in outputlines:
 
 validlinesstring="\n".join(validlines)
 validpeople=[]
-
+#Splitting all the individual records 
 for i in validlinesstring.split("INDI"):
     validpeople.append(i)
-
+#Getting  all the family records 
 families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
 #Getting and fetching all the details in Individuals Table
@@ -115,8 +120,8 @@ for i in range(0, len(families)):
     member = families[i].split("\n") 
     c = set()
     person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A'] 
-    for j in member: 
-        mb = j.split('|')
+    for j in range(0,len(member)): 
+        mb = member[j].split('|')
         if '' == mb[0]: #Getting all the ids 
             last = mb[-1].replace('@','') 
             person1[0] = last
@@ -141,9 +146,9 @@ for i in range(0, len(families)):
             c.add(last)
             person1[7] = c
         elif 'DIV' in mb: #Getting information about divorce details
-            person1[2] = 'Y'
+            person1[2] = member[j+1].split('|')[-1]
         elif 'MARR' in mb: #Getting information about Marriage details
-            person1[1] = 'Y'
+            person1[1] = member[j+1].split('|')[-1]
     y.add_row(person1)
 
 print ("Individuals")
@@ -151,5 +156,126 @@ print (x)
 print ("Families")
 print (y)
 
+#___________________________________________________________________________________________________________
+print( "Story ID -  US23 Unique name and birth date")
+names=[]
+dob=[]
+id=[]
 
-    
+for row in x:
+    row.border = False
+    row.header = False
+    names.append(row.get_string(fields=["Name"]).strip().replace('/',''))
+    dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+    id.append(row.get_string(fields=["ID"]).strip().replace('/',''))
+warning=0
+error=0
+for i in range(0,len(names)):
+    for j in range(i+1, len(names)):
+        if(names[i]==names[j]):
+            if(dob[i]==dob[j]):
+                print(f"Error : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]}")
+                error=error+1
+
+            else:
+                print(f"Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
+                warning=warning+1
+
+if warning==0 and error==0:
+    print("No errors found")
+
+   
+print( "Story ID -  US25 Unique first names in families")
+family={}
+
+
+for row in y:
+    row.border = False
+    row.header = False
+    fam=[]
+    fam.append(row.get_string(fields=["Husband Name"]).strip().replace('/','').split(" ")[0])
+    fam.append(row.get_string(fields=["Wife Name"]).strip().replace('/','').split(" ")[0])
+    id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+    fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+    family[id]=fam
+
+for i in family:
+    childern= family[i][-1]
+    patterns= r'\w+'
+    if childern != 'N/A':
+        match= re.findall(patterns, childern)
+        child=[]
+        if (match[0]!='NA'):
+            for j in range(0,len(match)):
+                for row in x:
+                    row.border = False
+                    row.header = False
+                    if (row.get_string(fields=["ID"]).strip()) == match[j]:
+                        child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0])
+                    
+        family[i].pop()
+        family[i]=family[i]+child
+error=0
+for i in family:
+    uniquefamily=list(set(family[i]))
+    if(len(family[i])!=len(uniquefamily)):
+        error=1
+        print (f"family Id {i} has same name - {family[i]}")
+if(error==0):
+    print("No error detected.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#__________________________________________________________________________________________________________________________
