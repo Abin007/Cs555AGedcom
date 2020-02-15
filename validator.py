@@ -71,8 +71,6 @@ families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
 #Getting and fetching all the details in Individuals Table
 x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Age","Death","Child","Spouse"]
-a = set()
-b = set()
 person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A','N/A']
 
 for i in range(1, len(validpeople)):
@@ -109,7 +107,6 @@ for i in range(1, len(validpeople)):
 
 #Getting and Fetching all the details in Families Table
 y.field_names = ["ID", "Married", "Divorced", 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children']
-c = set()
 person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A']
 
 for i in range(0, len(families)):
