@@ -54,6 +54,7 @@ for i in lines:
             outputlines.append("<-- "+word[0]+"|"+word[1]+"|"+"N"+"|"+" ".join(word[2:]))
         else:
             outputlines.append("<-- "+word[0]+"|"+word[1]+"|"+"N"+"|")
+
 validlines=[]
 for i in outputlines:
     if ('Y' in i.split("|")):
@@ -104,6 +105,7 @@ for i in range(1, len(validpeople)):
             person[7]=a
         
     x.add_row(person)
+
 #Getting and Fetching all the details in Families Table
 y.field_names = ["ID", "Married", "Divorced", 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children']
 c = set()
