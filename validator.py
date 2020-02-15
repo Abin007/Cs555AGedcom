@@ -217,10 +217,29 @@ for i in family:
 if(error==0):
     print("No error detected.")
 
+#___________________________________________________________________________________________________
 
+print("Story ID - US30 List Living Married")
+marriedPeople = []
+for row in y:
+    row.border = False
+    row.header = False
+    if (row.get_string(fields=["Married"]).strip()) != 'N/A' and (row.get_string(fields=["Divorced"]).strip()) == 'N/A':
+        Hid = (row.get_string(fields=["Husband ID"]).strip())
+        Wid = (row.get_string(fields=["Wife ID"]).strip())
+        flag=0
+        for row1 in x:
+            row1.border = False
+            row1.header = False
+            if (row1.get_string(fields=["Alive"]).strip()) == 'False':
+                if (row1.get_string(fields=["ID"]).strip()) == Hid or (row1.get_string(fields=["ID"]).strip()) == Wid:
+                    flag=1
+        if flag == 0:
+            marriedPeople.append((row.get_string(fields=["ID"]).strip()))
 
-
-
+print (marriedPeople)
+                    
+            
 
 
 
