@@ -56,7 +56,6 @@ for i in lines:
         else:
             outputlines.append("<-- "+word[0]+"|"+word[1]+"|"+"N"+"|")
 
-#Getting all valid lines from the input
 validlines=[]
 for i in outputlines:
     if ('Y' in i.split("|")):
@@ -72,8 +71,6 @@ families=validpeople[-1].split("0|FAM")[1:]
 validpeople[-1]=validpeople[-1].split("0|FAM")[0]
 #Getting and fetching all the details in Individuals Table
 x.field_names = ["ID", "Name", "Gender", "Birthday","Alive","Age","Death","Child","Spouse"]
-a = set()
-b = set()
 person=['N/A','N/A','N/A','N/A',True,'N/A','N/A','N/A','N/A']
 
 for i in range(1, len(validpeople)):
@@ -107,9 +104,9 @@ for i in range(1, len(validpeople)):
             person[7]=a
         
     x.add_row(person)
+
 #Getting and Fetching all the details in Families Table
 y.field_names = ["ID", "Married", "Divorced", 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name', 'Children']
-c = set()
 person1 = ['N/A','N/A','N/A','N/A','N/A','N/A','N/A','N/A']
 
 for i in range(0, len(families)):
@@ -220,8 +217,37 @@ for i in family:
 if(error==0):
     print("No error detected.")
 
+#___________________________________________________________________________________________________
 
+print("Story ID - US30 List Living Married")
 
+livingMarried = PrettyTable()
+livingMarried.field_names = ['Husband ID', 'Husband Name', 'Wife ID', 'Wife Name']
+for row in y:
+    marriedPeople = []
+    row.border = False
+    row.header = False
+    if (row.get_string(fields=["Married"]).strip()) != 'N/A' and (row.get_string(fields=["Divorced"]).strip()) == 'N/A':
+        Hid = (row.get_string(fields=["Husband ID"]).strip())
+        Wid = (row.get_string(fields=["Wife ID"]).strip())
+        flag=0
+        for row1 in x:
+            row1.border = False
+            row1.header = False
+            if (row1.get_string(fields=["Alive"]).strip()) == 'False':
+                if (row1.get_string(fields=["ID"]).strip()) == Hid or (row1.get_string(fields=["ID"]).strip()) == Wid:
+                    flag=1
+        if flag == 0:
+            marriedPeople.append((row.get_string(fields=["Husband ID"]).strip()))
+            marriedPeople.append((row.get_string(fields=["Husband Name"]).strip()))
+            marriedPeople.append((row.get_string(fields=["Wife ID"]).strip()))
+            marriedPeople.append((row.get_string(fields=["Wife Name"]).strip()))
+            livingMarried.add_row(marriedPeople)
+
+print ('List of Living Married is -->')
+print (livingMarried)
+                    
+print ('Story ID - US31 List Living Single')
 
 
 
