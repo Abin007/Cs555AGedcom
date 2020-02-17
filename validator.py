@@ -225,59 +225,9 @@ def StoryIDUS25():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #_________tushr's storis_________________________________________________________________________________________________________________
 
-
+#________________________________________________________________________________________________________________________________________
 print("Story ID - US30 List Living Married")
 
 def StoryIDUS30():
@@ -306,125 +256,26 @@ def StoryIDUS30():
 
     print ('List of Living Married is -->')
     print (livingMarried)
+
 StoryIDUS30()    
+
 print ('Story ID - US31 List Living Single')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def StoryIDUS31():
+    livingSingle = PrettyTable()
+    livingSingle.field_names = ['ID','Name']
+    
+    for row in x:
+        row.border = False
+        row.header = False
+        havingNoValentine = []
+        if (row.get_string(fields=["Spouse"]).strip()) == 'N/A':
+            havingNoValentine.append(row.get_string(fields=["ID"]).strip())
+            havingNoValentine.append(row.get_string(fields=["Name"]).strip())
+            livingSingle.add_row(havingNoValentine)
+    
+    print ('List of Living Single is -->')
+    print (livingSingle)
+
+StoryIDUS31()
 #_____________Prateek's code__________________________________________________________________________________________________________
