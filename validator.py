@@ -178,7 +178,6 @@ def StoryIDUS23():
     if warning==0 and error==0:
         return ("No errors found")
 
-print(StoryIDUS23())
 
 
    
@@ -220,7 +219,7 @@ def StoryIDUS25():
     if(error==0):
         return ("No error detected.")
 
-print(StoryIDUS25())
+
 #___________________________________________________________________________________________________
 
 print("Story ID - US30 List Living Married")
