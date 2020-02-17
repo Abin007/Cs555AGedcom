@@ -151,72 +151,76 @@ print (y)
 
 #___________________________________________________________________________________________________________
 print( "Story ID -  US23 Unique name and birth date")
-names=[]
-dob=[]
-id=[]
+def StoryIDUS23():
+    names=[]
+    dob=[]
+    id=[]
 
-for row in x:
-    row.border = False
-    row.header = False
-    names.append(row.get_string(fields=["Name"]).strip().replace('/',''))
-    dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
-    id.append(row.get_string(fields=["ID"]).strip().replace('/',''))
-warning=0
-error=0
-for i in range(0,len(names)):
-    for j in range(i+1, len(names)):
-        if(names[i]==names[j]):
-            if(dob[i]==dob[j]):
-                print(f"Error : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]}")
-                error=error+1
+    for row in x:
+        row.border = False
+        row.header = False
+        names.append(row.get_string(fields=["Name"]).strip().replace('/',''))
+        dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+        id.append(row.get_string(fields=["ID"]).strip().replace('/',''))
+    warning=0
+    error=0
+    for i in range(0,len(names)):
+        for j in range(i+1, len(names)):
+            if(names[i]==names[j]):
+                if(dob[i]==dob[j]):
+                    return (f"Error : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]}")
+                    error=error+1
 
-            else:
-                print(f"Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
-                warning=warning+1
+                else:
+                    return (f"Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
+                    warning=warning+1
 
-if warning==0 and error==0:
-    print("No errors found")
+    if warning==0 and error==0:
+        return ("No errors found")
+
+print(StoryIDUS23())
+
 
    
 print( "Story ID -  US25 Unique first names in families")
-family={}
+def StoryIDUS25():
+    family={}
+    for row in y:
+        row.border = False
+        row.header = False
+        fam=[]
+        fam.append(row.get_string(fields=["Husband Name"]).strip().replace('/','').split(" ")[0])
+        fam.append(row.get_string(fields=["Wife Name"]).strip().replace('/','').split(" ")[0])
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+        family[id]=fam
 
+    for i in family:
+        childern= family[i][-1]
+        patterns= r'\w+'
+        if childern != 'N/A':
+            match= re.findall(patterns, childern)
+            child=[]
+            if (match[0]!='NA'):
+                for j in range(0,len(match)):
+                    for row in x:
+                        row.border = False
+                        row.header = False
+                        if (row.get_string(fields=["ID"]).strip()) == match[j]:
+                            child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0])
+                        
+            family[i].pop()
+            family[i]=family[i]+child
+    error=0
+    for i in family:
+        uniquefamily=list(set(family[i]))
+        if(len(family[i])!=len(uniquefamily)):
+            error=1
+            return(f"family Id {i} has same name - {family[i]}")
+    if(error==0):
+        return ("No error detected.")
 
-for row in y:
-    row.border = False
-    row.header = False
-    fam=[]
-    fam.append(row.get_string(fields=["Husband Name"]).strip().replace('/','').split(" ")[0])
-    fam.append(row.get_string(fields=["Wife Name"]).strip().replace('/','').split(" ")[0])
-    id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-    fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
-    family[id]=fam
-
-for i in family:
-    childern= family[i][-1]
-    patterns= r'\w+'
-    if childern != 'N/A':
-        match= re.findall(patterns, childern)
-        child=[]
-        if (match[0]!='NA'):
-            for j in range(0,len(match)):
-                for row in x:
-                    row.border = False
-                    row.header = False
-                    if (row.get_string(fields=["ID"]).strip()) == match[j]:
-                        child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0])
-                    
-        family[i].pop()
-        family[i]=family[i]+child
-error=0
-for i in family:
-    uniquefamily=list(set(family[i]))
-    if(len(family[i])!=len(uniquefamily)):
-        error=1
-        print (f"family Id {i} has same name - {family[i]}")
-if(error==0):
-    print("No error detected.")
-
+print(StoryIDUS25())
 #___________________________________________________________________________________________________
 
 print("Story ID - US30 List Living Married")
