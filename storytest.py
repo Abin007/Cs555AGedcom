@@ -8,7 +8,12 @@ class fooTest(unittest.TestCase):
 
     def test_story_us25(self):
         self.assertEqual(validator.StoryIDUS25(),"family Id F4 has same name - ['Robert', 'Kris', 'Kim', 'Khloé', 'Kourtney', 'Kim']")
-
+    
+    def test_story_us30(self):
+        print()
+    
+    def test_story_us31(self):
+        print()
 
 
 if __name__=='__main__':
