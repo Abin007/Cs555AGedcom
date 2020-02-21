@@ -17,6 +17,12 @@ class fooTest(unittest.TestCase):
         x.add_row(['I7', 'Bruce /Jenner/', 'I6', 'Kris /Jenner/'])
         x.add_row(['I13', 'Travis /Scott/', 'I12', 'Kylie Jenner'])
         self.assertTrue(validator.StoryIDUS30(), x)
+        y = PrettyTable()
+        y.field_names = ['Husband ID', 'Husband Name', 'Wife ID', 'Wife Name']
+        y.add_row(['I20', 'Kanye /West/', 'I1', 'Kim /Kardashian/'])
+        y.add_row(['I7', 'Bruce /Jenner/', 'I6', 'Kris /Jenner/'])
+        y.add_row(['I13', 'Prateek /Jani/', 'I12', 'Kylie Jenner'])
+        self.assertTrue(validator.StoryIDUS30(), y)
     
     def test_story_us31(self):
         x = PrettyTable()
