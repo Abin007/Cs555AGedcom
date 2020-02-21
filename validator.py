@@ -215,7 +215,7 @@ def StoryIDUS25():
         uniquefamily=list(set(family[i]))
         if(len(family[i])!=len(uniquefamily)):
             error=1
-            return(f"family Id {i} has same name - {family[i]}")
+            return(f"Error: family Id {i} has duplicate names")
     if(error==0):
         return ("No error detected.")
 
