@@ -7,7 +7,7 @@ x= PrettyTable()
 y= PrettyTable()
 lines=[]
 outputlines=[]
-with open('Family-2-7-Feb-2020-544.ged') as line:
+with open('Family-2-21-Feb-2020-525.ged') as line:
     lines=line.read().splitlines()
 
 tagdictionary={
