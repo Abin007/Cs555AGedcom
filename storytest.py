@@ -16,7 +16,7 @@ class fooTest(unittest.TestCase):
         x.add_row(['I2', 'Kanye /West/', 'I1', 'Kim /Kardashian/'])
         x.add_row(['I7', 'Bruce /Jenner/', 'I6', 'Kris /Jenner/'])
         x.add_row(['I13', 'Travis /Scott/', 'I12', 'Kylie Jenner'])
-        self.assertEqual(validator.StoryIDUS30(), x)
+        self.assertTrue(validator.StoryIDUS30(), x)
     
     def test_story_us31(self):
         x = PrettyTable()
@@ -27,7 +27,7 @@ class fooTest(unittest.TestCase):
         x.add_row(['I11', 'North /West/'])
         x.add_row(['I14', 'Kendall /Jenner/'])
         x.add_row(['I15', 'Stormi /Webster/'])
-        self.assertEqual(validator.StoryIDUS31(), x)
+        self.assertTrue(validator.StoryIDUS31(), x)
 
 
 if __name__=='__main__':
