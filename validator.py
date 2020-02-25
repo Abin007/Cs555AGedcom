@@ -150,7 +150,7 @@ print ("Families")
 print (y)
 
 #___________________________________________________________________________________________________________
-print( "Story ID -  US23 Unique name and birth date")
+
 def StoryIDUS23():
     names=[]
     dob=[]
@@ -180,8 +180,7 @@ def StoryIDUS23():
 
 
 
-   
-print( "Story ID -  US25 Unique first names in families")
+
 def StoryIDUS25():
     family={}
     for row in y:
@@ -227,8 +226,35 @@ def StoryIDUS25():
 
 #_________tushr's storis_________________________________________________________________________________________________________________
 
-#________________________________________________________________________________________________________________________________________
-print("Story ID - US30 List Living Married")
+def StoryIDUS01():
+    dates=[]
+    errors=[]
+    for row in x:
+        row.border = False
+        row.header = False
+        dates.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+        if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
+            dates.append(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
+    for row in y:
+        row.border = False
+        row.header = False
+        dates.append(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
+        if((row.get_string(fields=["Divorced"]).strip()=='N/A')==False):
+            dates.append(datetime.strptime((row.get_string(fields=["Divorced"]).strip()), '%d %b %Y'))
+
+     
+    for i in dates:
+        if(datetime.date(i) > date.today()):
+            errors.append(i)
+
+    
+    return errors
+
+StoryIDUS01()
+
+def StoryIDUS02():
+    return 0
+#_______________________________________________________________________________________________________________________________________
 
 def StoryIDUS30():
     livingMarried = PrettyTable()
@@ -258,9 +284,9 @@ def StoryIDUS30():
     #print (livingMarried)
     return (livingMarried)
 
-StoryIDUS30()    
 
-print ('Story ID - US31 List Living Single')
+
+
 
 def StoryIDUS31():
     livingSingle = PrettyTable()
@@ -279,6 +305,6 @@ def StoryIDUS31():
     #print (livingSingle)
     return livingSingle
     
-StoryIDUS31()
+
 
 #_____________Prateek's code__________________________________________________________________________________________________________
