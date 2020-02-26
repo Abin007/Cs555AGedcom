@@ -182,7 +182,7 @@ def StoryIDUS23():
     else:
         return ("US Story US23 - No errors found")
     
-print(StoryIDUS23())
+
 
 
 
@@ -245,7 +245,7 @@ def StoryIDUS25():
     else:
         return (errors)
 
-print(StoryIDUS25()) 
+ 
 
 
 #___________________________________________________________________________________________________

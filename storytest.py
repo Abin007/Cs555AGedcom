@@ -5,10 +5,10 @@ from prettytable import PrettyTable
 
 class fooTest(unittest.TestCase):
     def test_story_us23(self):
-        self.assertEqual(validator.StoryIDUS23(),"Error : Might be the same I1:Kim Kardashian and I16:Kim Kardashian")
+        self.assertEqual(validator.StoryIDUS23(),['US Story US23 - Warning : Might be the same I1:Kim Kardashian and I16:Kim Kardashian ', 'US Story US23 - Error : Might be the same I1:Kim Kardashian and I17:Kim Kardashian', 'US Story US23 - Warning : Might be the same I16:Kim Kardashian and I17:Kim Kardashian '])
 
     def test_story_us25(self):
-        self.assertEqual(validator.StoryIDUS25(),"Error: family Id F4 has duplicate names")
+        self.assertEqual(validator.StoryIDUS25(),['US Story US25 - Warning : Might be the same I16 and I17 in Family F4', 'US Story US25 - Warning : Might be the same I16 and I1 in Family F4', 'US Story US25 - Error : Might be the same I17 and I1 in Family F4'])
     
     def test_story_us30(self):
         x = PrettyTable()
