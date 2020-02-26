@@ -7,7 +7,7 @@ x= PrettyTable()
 y= PrettyTable()
 lines=[]
 outputlines=[]
-with open('Family-2-21-Feb-2020-525.ged') as line:
+with open('Family-2-26-Feb-2020-575.ged') as line:
     lines=line.read().splitlines()
 
 tagdictionary={
@@ -162,27 +162,33 @@ def StoryIDUS23():
         names.append(row.get_string(fields=["Name"]).strip().replace('/',''))
         dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
         id.append(row.get_string(fields=["ID"]).strip().replace('/',''))
-    warning=0
-    error=0
+    error=[]
     for i in range(0,len(names)):
         for j in range(i+1, len(names)):
             if(names[i]==names[j]):
                 if(dob[i]==dob[j]):
-                    return (f"Error : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]}")
-                    error=error+1
-
+                    error.append(f"US Story US23 - Error : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]}")
                 else:
-                    return (f"Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
-                    warning=warning+1
+                    error.append(f"US Story US23 - Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
+                    
 
-    if warning==0 and error==0:
-        return ("No errors found")
+            elif(names[i]!=names[j]):
+                if(dob[i]==dob[j]):
+                    error.append(f"US Story US23 - Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
+                    
 
+    if len(error)!=0:
+        return (error)
+    else:
+        return ("US Story US23 - No errors found")
+    
+print(StoryIDUS23())
 
 
 
 def StoryIDUS25():
     family={}
+    errors=[]
     for row in y:
         row.border = False
         row.header = False
@@ -199,24 +205,47 @@ def StoryIDUS25():
         if childern != 'N/A':
             match= re.findall(patterns, childern)
             child=[]
+            dob=[]
             if (match[0]!='NA'):
                 for j in range(0,len(match)):
                     for row in x:
                         row.border = False
                         row.header = False
                         if (row.get_string(fields=["ID"]).strip()) == match[j]:
-                            child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0])
+                            child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0].lower())
+                            dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                         
-            family[i].pop()
-            family[i]=family[i]+child
-    error=0
-    for i in family:
-        uniquefamily=list(set(family[i]))
-        if(len(family[i])!=len(uniquefamily)):
-            error=1
-            return(f"Error: family Id {i} has duplicate names")
-    if(error==0):
-        return ("No error detected.")
+            # family[i].pop()
+            # family[i]=family[i]+child
+            
+            for k in range(0,len(child)):
+                for j in range(k+1, len(child)):
+                    if(child[k]==child[j]):
+                        if(dob[k]==dob[j]):
+                            errors.append(f"US Story US25 - Error : Might be the same {match[k]} and {match[j]} in Family {i}")
+                        else:
+                            errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
+
+                    
+
+                    elif(child[k]!=child[j]):
+                        if(dob[k]==dob[j]):
+                            errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
+            
+
+    # error=0
+    # print(family)
+    # for i in family:
+    #     uniquefamily=list(set(family[i]))
+    #     if(len(family[i])!=len(uniquefamily)):
+    #         error=1
+    #         return(f"Error: family Id {i} has duplicate names")
+    if(len(errors)==0):
+        return ("User Story US25 - No error detected.")
+    else:
+        return (errors)
+
+print(StoryIDUS25()) 
 
 
 #___________________________________________________________________________________________________
@@ -250,7 +279,7 @@ def StoryIDUS01():
     
     return errors
 
-StoryIDUS01()
+
 
 def StoryIDUS02():
     errors=[]
