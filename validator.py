@@ -253,7 +253,26 @@ def StoryIDUS01():
 StoryIDUS01()
 
 def StoryIDUS02():
-    return 0
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        married=(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
+        Husband = (row.get_string(fields=["Husband ID"]).strip())
+        Wife = (row.get_string(fields=["Wife ID"]).strip())
+        for row1 in x:
+            row1.border = False
+            row1.header = False
+            if row1.get_string(fields=["ID"]).strip() == Husband:
+                husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+                if(husbanddate>married):
+                    errors.append(Husband)
+            if row1.get_string(fields=["ID"]).strip() == Wife:
+                wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+                if(wifebdate>married):
+                    errors.append(Wife)
+
+    
 #_______________________________________________________________________________________________________________________________________
 
 def StoryIDUS30():
