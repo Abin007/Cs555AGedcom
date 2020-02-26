@@ -7,7 +7,7 @@ x= PrettyTable()
 y= PrettyTable()
 lines=[]
 outputlines=[]
-with open('Family-2-26-Feb-2020-575.ged') as line:
+with open('Family-2-21-Feb-2020-525.ged') as line:
     lines=line.read().splitlines()
 
 tagdictionary={
@@ -150,7 +150,7 @@ print ("Families")
 print (y)
 
 #___________________________________________________________________________________________________________
-
+#User story 23 - No more than one individual with the same name and birth date should appear in a GEDCOM file
 def StoryIDUS23():
     names=[]
     dob=[]
@@ -184,7 +184,7 @@ def StoryIDUS23():
     
 
 
-
+#User story 25 - No more than one child with the same name and birth date should appear in a family
 
 def StoryIDUS25():
     family={}
@@ -245,7 +245,7 @@ def StoryIDUS25():
     else:
         return (errors)
 
- 
+
 
 
 #___________________________________________________________________________________________________
@@ -261,15 +261,30 @@ def StoryIDUS01():
     for row in x:
         row.border = False
         row.header = False
-        dates.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+        if((row.get_string(fields=["Birthday"]).strip()=='N/A')==False):
+            birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+            if(datetime.date(birth) > date.today()):
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"Individual ID - {id}")
+
         if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
-            dates.append(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
+            birth=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
+            if(datetime.date(birth) > date.today()):
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"Individual ID - {id}")
     for row in y:
         row.border = False
         row.header = False
-        dates.append(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
+        if((row.get_string(fields=["Married"]).strip()=='N/A')==False):
+            married=(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
+            if(datetime.date(married) > date.today()):
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"Family ID - {id}")
         if((row.get_string(fields=["Divorced"]).strip()=='N/A')==False):
-            dates.append(datetime.strptime((row.get_string(fields=["Divorced"]).strip()), '%d %b %Y'))
+            death=(datetime.strptime((row.get_string(fields=["Divorced"]).strip()), '%d %b %Y'))
+            if(datetime.date(death) > date.today()):
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"Family ID - {id}")
 
      
     for i in dates:
@@ -300,8 +315,9 @@ def StoryIDUS02():
                 wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(wifebdate>married):
                     errors.append(Wife)
+    return errors
 
-    
+   
 #_______________________________________________________________________________________________________________________________________
 
 def StoryIDUS30():
