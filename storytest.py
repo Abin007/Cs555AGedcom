@@ -9,7 +9,7 @@ class fooTest(unittest.TestCase):
 
     def test_story_us25(self):
         us25=set()
-        self.assertEqual(validator.StoryIDUS25(),{'US Story US25 - Error : Might be the same I16 and I1 in Family F4'} )
+        self.assertEqual(validator.StoryIDUS25(),"US Story US25- the children with errors are -['I1', 'I16']" )
     
     def test_story_us30(self):
         x = PrettyTable()

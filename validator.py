@@ -222,15 +222,17 @@ def StoryIDUS25():
                 for j in range(k+1, len(child)):
                     if(child[k]==child[j]):
                         if(dob[k]==dob[j]):
-                            errors.append(f"US Story US25 - Error : Might be the same {match[k]} and {match[j]} in Family {i}")
-                        else:
-                            errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
+                            errors.append(match[k])
+                            errors.append(match[j])
+                            # errors.append(f"US Story US25 - Error : Might be the same {match[k]} and {match[j]} in Family {i}")
+                    #     else:
+                    #         errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
 
                     
 
-                    elif(child[k]!=child[j]):
-                        if(dob[k]==dob[j]):
-                            errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
+                    # elif(child[k]!=child[j]):
+                    #     if(dob[k]==dob[j]):
+                    #         errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
             
 
     # error=0
@@ -243,7 +245,7 @@ def StoryIDUS25():
     if(len(errors)==0):
         return ("User Story US25 - No error detected.")
     else:
-        return set(errors)
+        return (f"US Story US25- the children with errors are -{sorted(errors)}")
 print("\nUser story 25 - No more than one child with the same name and birth date should appear in a family\n")
 print(StoryIDUS25())
 
