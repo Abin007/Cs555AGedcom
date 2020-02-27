@@ -324,11 +324,11 @@ def StoryIDUS02():
             if row1.get_string(fields=["ID"]).strip() == Husband:
                 husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(husbanddate>married):
-                    errors.append(f"US02 - Error : individual {Husband} occurs birthdate occurs before marriage")
+                    errors.append(f"US02 - Error : individual {Husband} birthdate occurs before marriage")
             if row1.get_string(fields=["ID"]).strip() == Wife:
                 wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(wifebdate>married):
-                    errors.append(f"US02 - Error : individual {Wife} occurs birthdate occurs before marriage")
+                    errors.append(f"US02 - Error : individual {Wife} birthdate occurs before marriage")
     return errors
 
 
