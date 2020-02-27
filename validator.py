@@ -262,29 +262,33 @@ def StoryIDUS01():
         row.border = False
         row.header = False
         if((row.get_string(fields=["Birthday"]).strip()=='N/A')==False):
+            birthstr=row.get_string(fields=["Birthday"]).strip()
             birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"Individual ID - {id}")
+                errors.append(f"US Story US01 - Error : Individual ID - {id} Birthday {birthstr} ")
 
         if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
+            birthstr=row.get_string(fields=["Death"]).strip()
             birth=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"Individual ID - {id}")
+                errors.append(f"US Story US01 - Error : Individual ID - {id} Death {birthstr}")
     for row in y:
         row.border = False
         row.header = False
         if((row.get_string(fields=["Married"]).strip()=='N/A')==False):
+            marriedstr=row.get_string(fields=["Married"]).strip()
             married=(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
             if(datetime.date(married) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"Family ID - {id}")
+                errors.append(f"US Story US01 - Error : Family ID - {id} Married {marriedstr}")
         if((row.get_string(fields=["Divorced"]).strip()=='N/A')==False):
+            deathstr=row.get_string(fields=["Divorced"]).strip()
             death=(datetime.strptime((row.get_string(fields=["Divorced"]).strip()), '%d %b %Y'))
             if(datetime.date(death) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"Family ID - {id}")
+                errors.append(f"US Story US01 - Error : Family ID - {id} Divorced {deathstr}")
 
      
     for i in dates:
@@ -294,7 +298,7 @@ def StoryIDUS01():
     
     return errors
 
-
+print(StoryIDUS01())
 
 def StoryIDUS02():
     errors=[]
