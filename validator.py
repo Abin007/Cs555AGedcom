@@ -167,21 +167,21 @@ def StoryIDUS23():
         for j in range(i+1, len(names)):
             if(names[i]==names[j]):
                 if(dob[i]==dob[j]):
-                    error.append(f"US Story US23 - Error : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]}")
+                    error.append(f"US23 - Error : Individual {id[i]} and {id[j]} Might be the same")
                 else:
-                    error.append(f"US Story US23 - Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
+                    error.append(f"US23 - Error : Individual {id[i]} and {id[j]} Might be the same")
                     
 
             elif(names[i]!=names[j]):
                 if(dob[i]==dob[j]):
-                    error.append(f"US Story US23 - Warning : Might be the same {id[i]}:{names[i]} and {id[j]}:{names[j]} ")
+                    error.append(f"US23 - Error : Individual {id[i]} and {id[j]} Might be the same")
                     
 
     if len(error)!=0:
         return (error)
     else:
-        return ("US Story US23 - No errors found")
-print("\nUser story 23 -  No more than one individual with the same name and birth date should appear in a GEDCOM file\n")
+        return ("US23 - No errors found")
+
 print(StoryIDUS23())
     
 
@@ -222,9 +222,16 @@ def StoryIDUS25():
                 for j in range(k+1, len(child)):
                     if(child[k]==child[j]):
                         if(dob[k]==dob[j]):
-                            errors.append(match[k])
-                            errors.append(match[j])
-                            # errors.append(f"US Story US25 - Error : Might be the same {match[k]} and {match[j]} in Family {i}")
+                            # errors.append(match[k])
+                            # errors.append(match[j])
+                            indi=[]
+                            indi.append(match[k])
+                            indi.append(match[j])
+                            indi.sort()
+                            strindi=" ".join(indi)
+
+                            errors.append(f"US25 - Error : Individual {strindi} might be the same  in Family {i}")
+                            
                     #     else:
                     #         errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
 
@@ -243,10 +250,10 @@ def StoryIDUS25():
     #         error=1
     #         return(f"Error: family Id {i} has duplicate names")
     if(len(errors)==0):
-        return ("User Story US25 - No error detected.")
+        return ("US25 - No error detected.")
     else:
-        return (f"US Story US25- the children with errors are -{sorted(errors)}")
-print("\nUser story 25 - No more than one child with the same name and birth date should appear in a family\n")
+        return (sorted(errors))
+
 print(StoryIDUS25())
 
 
@@ -268,14 +275,14 @@ def StoryIDUS01():
             birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Individual ID - {id} Birthday {birthstr} occurs in the future")
+                errors.append(f"US01 - Error : Individual ID - {id} Birthday {birthstr} occurs in the future")
 
         if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
             birthstr=row.get_string(fields=["Death"]).strip()
             birth=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Individual ID - {id} Death {birthstr} occurs in the future")
+                errors.append(f"US01 - Error : Individual ID - {id} Death {birthstr} occurs in the future")
     for row in y:
         row.border = False
         row.header = False
@@ -284,13 +291,13 @@ def StoryIDUS01():
             married=(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
             if(datetime.date(married) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Family ID - {id} Married {marriedstr} occurs in the future")
+                errors.append(f"US01 - Error : Family ID - {id} Married {marriedstr} occurs in the future")
         if((row.get_string(fields=["Divorced"]).strip()=='N/A')==False):
             deathstr=row.get_string(fields=["Divorced"]).strip()
             death=(datetime.strptime((row.get_string(fields=["Divorced"]).strip()), '%d %b %Y'))
             if(datetime.date(death) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Family ID - {id} Divorced {deathstr} occurs in the future")
+                errors.append(f"US01 - Error : Family ID - {id} Divorced {deathstr} occurs in the future")
 
      
     for i in dates:
@@ -299,7 +306,7 @@ def StoryIDUS01():
 
     
     return errors
-print("\nUser story 01 - Dates before current date\n")
+
 
 print(StoryIDUS01())
 
@@ -317,13 +324,13 @@ def StoryIDUS02():
             if row1.get_string(fields=["ID"]).strip() == Husband:
                 husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(husbanddate>married):
-                    errors.append(Husband)
+                    errors.append(f"US02 - Error : individual {Husband} occurs birthdate occurs before marriage")
             if row1.get_string(fields=["ID"]).strip() == Wife:
                 wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(wifebdate>married):
-                    errors.append(Wife)
-    return (f"User story 02 - individual {errors} occurs birthdate occurs before marriage")
-print("\nUser story 02 - Birth before marriage\n")
+                    errors.append(f"US02 - Error : individual {Wife} occurs birthdate occurs before marriage")
+    return errors
+
 
 print(StoryIDUS02())
    

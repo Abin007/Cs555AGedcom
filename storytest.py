@@ -5,11 +5,11 @@ from prettytable import PrettyTable
 
 class fooTest(unittest.TestCase):
     def test_story_us23(self):
-        self.assertEqual(validator.StoryIDUS23(),['US Story US23 - Error : Might be the same I1:Kim Kardashian and I16:Kim Kardashian'])
+        self.assertEqual(validator.StoryIDUS23(),['US23 - Error : Individual I1 and I16 Might be the same'])
 
     def test_story_us25(self):
         us25=set()
-        self.assertEqual(validator.StoryIDUS25(),"US Story US25- the children with errors are -['I1', 'I16']" )
+        self.assertEqual(validator.StoryIDUS25(),['US25 - Error : Individual I1 I16 might be the same  in Family F4'] )
     
     def test_story_us30(self):
         x = PrettyTable()
@@ -37,10 +37,10 @@ class fooTest(unittest.TestCase):
         self.assertTrue(validator.StoryIDUS31(), x)
 
     def test_story_us01(self):
-        self.assertEqual(validator.StoryIDUS01(),['US Story US01 - Error : Individual ID - I15 Birthday 3 MAR 2021 occurs in the future'])
+        self.assertEqual(validator.StoryIDUS01(),['US01 - Error : Individual ID - I15 Birthday 3 MAR 2021 occurs in the future'])
 
     def test_story_us02(self):
-        self.assertEqual(validator.StoryIDUS02(),"User story 02 - individual ['I6'] occurs birthdate occurs before marriage")
+        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I6 occurs birthdate occurs before marriage'])
 
 
 if __name__=='__main__':
