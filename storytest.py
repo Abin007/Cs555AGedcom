@@ -8,7 +8,7 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS23(),['US Story US23 - Error : Might be the same I1:Kim Kardashian and I16:Kim Kardashian'])
 
     def test_story_us25(self):
-        self.assertEqual(validator.StoryIDUS25(),['US Story US25 - Error : Might be the same I1 and I16 in Family F4'])
+        self.assertEqual(validator.StoryIDUS25(),['US Story US25 - Error : Might be the same I16 and I1 in Family F4'])
     
     def test_story_us30(self):
         x = PrettyTable()
@@ -36,7 +36,7 @@ class fooTest(unittest.TestCase):
         self.assertTrue(validator.StoryIDUS31(), x)
 
     def test_story_us01(self):
-        self.assertEqual(validator.StoryIDUS01(),['Individual ID - I15'])
+        self.assertEqual(validator.StoryIDUS01(),['US Story US01 - Error : Individual ID - I15 Birthday 3 MAR 2021 '])
 
     def test_story_us02(self):
         self.assertEqual(validator.StoryIDUS02(),['I6'])
