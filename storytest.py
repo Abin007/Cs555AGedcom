@@ -40,7 +40,7 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS01(),['US Story US01 - Error : Individual ID - I15 Birthday 3 MAR 2021 occurs in the future'])
 
     def test_story_us02(self):
-        self.assertEqual(validator.StoryIDUS02(),['I6'])
+        self.assertEqual(validator.StoryIDUS02(),"User story 02 - individual ['I6'] occurs birthdate occurs before marriage")
 
 
 if __name__=='__main__':

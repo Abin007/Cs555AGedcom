@@ -181,6 +181,8 @@ def StoryIDUS23():
         return (error)
     else:
         return ("US Story US23 - No errors found")
+print("\nUser story 23 -  No more than one individual with the same name and birth date should appear in a GEDCOM file\n")
+print(StoryIDUS23())
     
 
 
@@ -242,8 +244,8 @@ def StoryIDUS25():
         return ("User Story US25 - No error detected.")
     else:
         return set(errors)
-
-
+print("\nUser story 25 - No more than one child with the same name and birth date should appear in a family\n")
+print(StoryIDUS25())
 
 
 #___________________________________________________________________________________________________
@@ -295,6 +297,7 @@ def StoryIDUS01():
 
     
     return errors
+print("\nUser story 01 - Dates before current date\n")
 
 print(StoryIDUS01())
 
@@ -317,8 +320,10 @@ def StoryIDUS02():
                 wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(wifebdate>married):
                     errors.append(Wife)
-    return errors
+    return (f"User story 02 - individual {errors} occurs birthdate occurs before marriage")
+print("\nUser story 02 - Birth before marriage\n")
 
+print(StoryIDUS02())
    
 #_______________________________________________________________________________________________________________________________________
 
