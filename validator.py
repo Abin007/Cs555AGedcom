@@ -193,14 +193,12 @@ def StoryIDUS25():
         row.border = False
         row.header = False
         fam=[]
-        fam.append(row.get_string(fields=["Husband Name"]).strip().replace('/','').split(" ")[0])
-        fam.append(row.get_string(fields=["Wife Name"]).strip().replace('/','').split(" ")[0])
         id=(row.get_string(fields=["ID"]).strip().replace('/',''))
         fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
         family[id]=fam
 
     for i in family:
-        childern= family[i][-1]
+        childern= family[i][0]
         patterns= r'\w+'
         if childern != 'N/A':
             match= re.findall(patterns, childern)
