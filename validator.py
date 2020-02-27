@@ -243,7 +243,7 @@ def StoryIDUS25():
     if(len(errors)==0):
         return ("User Story US25 - No error detected.")
     else:
-        return (errors)
+        return set(errors)
 
 
 
@@ -266,14 +266,14 @@ def StoryIDUS01():
             birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Individual ID - {id} Birthday {birthstr} ")
+                errors.append(f"US Story US01 - Error : Individual ID - {id} Birthday {birthstr} occurs in the future")
 
         if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
             birthstr=row.get_string(fields=["Death"]).strip()
             birth=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Individual ID - {id} Death {birthstr}")
+                errors.append(f"US Story US01 - Error : Individual ID - {id} Death {birthstr} occurs in the future")
     for row in y:
         row.border = False
         row.header = False
@@ -282,13 +282,13 @@ def StoryIDUS01():
             married=(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
             if(datetime.date(married) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Family ID - {id} Married {marriedstr}")
+                errors.append(f"US Story US01 - Error : Family ID - {id} Married {marriedstr} occurs in the future")
         if((row.get_string(fields=["Divorced"]).strip()=='N/A')==False):
             deathstr=row.get_string(fields=["Divorced"]).strip()
             death=(datetime.strptime((row.get_string(fields=["Divorced"]).strip()), '%d %b %Y'))
             if(datetime.date(death) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US Story US01 - Error : Family ID - {id} Divorced {deathstr}")
+                errors.append(f"US Story US01 - Error : Family ID - {id} Divorced {deathstr} occurs in the future")
 
      
     for i in dates:
