@@ -362,7 +362,7 @@ def StoryIDUS30():
 
     return (livingMarried)
 
-print ('List of Living Married is -->')
+print ('US30 - List of Living Married is -->')
 print(StoryIDUS30())
 
 def StoryIDUS31():
@@ -380,7 +380,7 @@ def StoryIDUS31():
     
     return livingSingle
 
-print ('List of Living Single is -->')
+print ('US31 - List of Living Single is -->')
 print(StoryIDUS31())
 
 #_____________Prateek's code__________________________________________________________________________________________________________
