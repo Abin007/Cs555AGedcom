@@ -275,14 +275,14 @@ def StoryIDUS01():
             birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US01 - Error : Individual ID - {id} Birthday {birthstr} occurs in the future")
+                errors.append(f"US01 - Error : Individual - {id} Birthday {birthstr} occurs in the future")
 
         if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
             birthstr=row.get_string(fields=["Death"]).strip()
             birth=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US01 - Error : Individual ID - {id} Death {birthstr} occurs in the future")
+                errors.append(f"US01 - Error : Individual - {id} Death {birthstr} occurs in the future")
     for row in y:
         row.border = False
         row.header = False
@@ -324,11 +324,11 @@ def StoryIDUS02():
             if row1.get_string(fields=["ID"]).strip() == Husband:
                 husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(husbanddate>married):
-                    errors.append(f"US02 - Error : individual {Husband} birthdate occurs before marriage")
+                    errors.append(f"US02 - Error : individual {Husband} birthdate {husbanddate} occurs after marriage {married}")
             if row1.get_string(fields=["ID"]).strip() == Wife:
                 wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(wifebdate>married):
-                    errors.append(f"US02 - Error : individual {Wife} birthdate occurs before marriage")
+                    errors.append(f"US02 - Error : individual {Wife} birthdate-{wifebdate} occurs after marriage {married}")
     return errors
 
 

@@ -49,10 +49,10 @@ class fooTest(unittest.TestCase):
         self.assertNotEqual(str(validator.StoryIDUS31()),str(y))
 
     def test_story_us01(self):
-        self.assertEqual(validator.StoryIDUS01(),['US01 - Error : Individual ID - I15 Birthday 3 MAR 2021 occurs in the future'])
+        self.assertEqual(validator.StoryIDUS01(),['US01 - Error : Individual - I15 Birthday 3 MAR 2021 occurs in the future'])
 
     def test_story_us02(self):
-        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I6 birthdate occurs before marriage'])
+        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00'])
 
 
 if __name__=='__main__':
