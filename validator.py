@@ -360,13 +360,10 @@ def StoryIDUS30():
                 marriedPeople.append((row.get_string(fields=["Wife Name"]).strip()))
                 livingMarried.add_row(marriedPeople)
 
-    #print ('List of Living Married is -->')
-    #print (livingMarried)
     return (livingMarried)
 
-
-
-
+print ('List of Living Married is -->')
+print(StoryIDUS30())
 
 def StoryIDUS31():
     livingSingle = PrettyTable()
@@ -381,10 +378,9 @@ def StoryIDUS31():
             havingNoValentine.append(row.get_string(fields=["Name"]).strip())
             livingSingle.add_row(havingNoValentine)
     
-    #print ('List of Living Single is -->')
-    #print (livingSingle)
     return livingSingle
-    
 
+print ('List of Living Single is -->')
+print(StoryIDUS31())
 
 #_____________Prateek's code__________________________________________________________________________________________________________
