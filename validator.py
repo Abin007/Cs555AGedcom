@@ -256,6 +256,8 @@ def StoryIDUS25():
 
 print(StoryIDUS25())
 
+#US-16 - Male last names
+
 def StoryIDUS16():
     family={}
     errors=[]
@@ -295,6 +297,30 @@ def StoryIDUS16():
 
 print(StoryIDUS16())
 
+def StoryIDUS17():
+    family={}
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        fam=[]
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        fam.append(row.get_string(fields=["Husband ID"]).strip().replace('/','').split(" ")[0])
+        fam.append(row.get_string(fields=["Wife ID"]).strip().replace('/','').split(" ")[0])
+        fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+        family[id]=fam
+    
+    for i in family:
+        childern= family[i][-1]
+        patterns= r'\w+'
+        if childern != 'N/A':
+            match= re.findall(patterns, childern)
+            family[i].pop()
+            family[i].append(match)
+    print(family)
+            
+    
+print(StoryIDUS17())
 
 #___________________________________________________________________________________________________
 
