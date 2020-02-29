@@ -256,6 +256,45 @@ def StoryIDUS25():
 
 print(StoryIDUS25())
 
+def StoryIDUS16():
+    family={}
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        fam=[]
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        fam.append(row.get_string(fields=["Husband Name"]).strip().replace('/','').split(" ")[-1].lower())
+        fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+        family[id]=fam
+    for i in family:
+        childern= family[i][-1]
+        patterns= r'\w+'
+        if childern != 'N/A':
+            match= re.findall(patterns, childern)
+            child=[]
+            if (match[0]!='NA'):
+                for j in range(0,len(match)):
+                    for row in x:
+                        row.border = False
+                        row.header = False
+                        if ((row.get_string(fields=["ID"]).strip()) == match[j]) and (row.get_string(fields=["Gender"]).strip()) == 'M' :
+                            child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[-1].lower())
+
+                        
+            family[i].pop()
+            family[i]=family[i]+child
+    for i in family:
+        if(len(family[i])>1):
+            if(len(list(set(family[i])))==len(family[i])):
+                errors.append(f"US16 - Error : Family {i} has male members with different last names")
+    
+    if(len(errors)>0):
+        return sorted(errors)
+
+
+print(StoryIDUS16())
+
 
 #___________________________________________________________________________________________________
 
