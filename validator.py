@@ -256,6 +256,71 @@ def StoryIDUS25():
 
 print(StoryIDUS25())
 
+#US-16 - Male last names
+
+def StoryIDUS16():
+    family={}
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        fam=[]
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        fam.append(row.get_string(fields=["Husband Name"]).strip().replace('/','').split(" ")[-1].lower())
+        fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+        family[id]=fam
+    for i in family:
+        childern= family[i][-1]
+        patterns= r'\w+'
+        if childern != 'N/A':
+            match= re.findall(patterns, childern)
+            child=[]
+            if (match[0]!='NA'):
+                for j in range(0,len(match)):
+                    for row in x:
+                        row.border = False
+                        row.header = False
+                        if ((row.get_string(fields=["ID"]).strip()) == match[j]) and (row.get_string(fields=["Gender"]).strip()) == 'M' :
+                            child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[-1].lower())
+
+                        
+            family[i].pop()
+            family[i]=family[i]+child
+    for i in family:
+        if(len(family[i])>1):
+            if(len(list(set(family[i])))==len(family[i])):
+                errors.append(f"US16 - Error : Family {i} has male members with different last names")
+    
+    if(len(errors)>0):
+        return sorted(errors)
+
+
+print(StoryIDUS16())
+
+def StoryIDUS17():
+    family={}
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        fam=[]
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        fam.append(row.get_string(fields=["Husband ID"]).strip().replace('/','').split(" ")[0])
+        fam.append(row.get_string(fields=["Wife ID"]).strip().replace('/','').split(" ")[0])
+        fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+        family[id]=fam
+    
+    for i in family:
+        childern= family[i][-1]
+        patterns= r'\w+'
+        if childern != 'N/A':
+            match= re.findall(patterns, childern)
+            family[i].pop()
+            family[i].append(match)
+    print(family)
+            
+    
+print(StoryIDUS17())
 
 #___________________________________________________________________________________________________
 
@@ -275,14 +340,14 @@ def StoryIDUS01():
             birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US01 - Error : Individual ID - {id} Birthday {birthstr} occurs in the future")
+                errors.append(f"US01 - Error : Individual - {id} Birthday {birthstr} occurs in the future")
 
         if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
             birthstr=row.get_string(fields=["Death"]).strip()
             birth=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                errors.append(f"US01 - Error : Individual ID - {id} Death {birthstr} occurs in the future")
+                errors.append(f"US01 - Error : Individual - {id} Death {birthstr} occurs in the future")
     for row in y:
         row.border = False
         row.header = False
@@ -324,11 +389,11 @@ def StoryIDUS02():
             if row1.get_string(fields=["ID"]).strip() == Husband:
                 husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(husbanddate>married):
-                    errors.append(f"US02 - Error : individual {Husband} birthdate occurs before marriage")
+                    errors.append(f"US02 - Error : individual {Husband} birthdate {husbanddate} occurs after marriage {married}")
             if row1.get_string(fields=["ID"]).strip() == Wife:
                 wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(wifebdate>married):
-                    errors.append(f"US02 - Error : individual {Wife} birthdate occurs before marriage")
+                    errors.append(f"US02 - Error : individual {Wife} birthdate-{wifebdate} occurs after marriage {married}")
     return errors
 
 
@@ -362,7 +427,7 @@ def StoryIDUS30():
 
     return (livingMarried)
 
-print ('List of Living Married is -->')
+print ('US30 - List of Living Married is -->')
 print(StoryIDUS30())
 
 def StoryIDUS31():
@@ -380,7 +445,7 @@ def StoryIDUS31():
     
     return livingSingle
 
-print ('List of Living Single is -->')
+print ('US31 - List of Living Single is -->')
 print(StoryIDUS31())
 
 #_____________Prateek's code__________________________________________________________________________________________________________
