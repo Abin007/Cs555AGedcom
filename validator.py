@@ -486,8 +486,28 @@ def StoryIDUS35():
     if recentBirths:
         return(recentBirths)
     else:
-        return('US35 - There are no recent births')
+        return('[ US35 - There are no recent births ]')
 
-print('Output for US35-->')
 print(StoryIDUS35())
+
+def StoryIDUS36():
+    pastDate = (date.today()-timedelta(days=30)).isoformat()
+    recentDeaths=[]
+    for row in x:
+        row.border = False
+        row.header = False
+        if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
+            deathstr=row.get_string(fields=["Death"]).strip()
+            death=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
+            if(str(datetime.date(death)) >= pastDate and datetime.date(death) < date.today()):
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                recentDeaths.append(f"US35 - Error : Individual - {id} Birthday {deathstr} died recently")
+    
+    if recentDeaths:
+        return(recentDeaths)
+    else:
+        return('[ US36 - There are no recent deaths ]')
+
+print(StoryIDUS36())
+    
 #_____________Prateek's code__________________________________________________________________________________________________________
