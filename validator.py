@@ -501,7 +501,7 @@ def StoryIDUS36():
             death=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
             if(str(datetime.date(death)) >= pastDate and datetime.date(death) < date.today()):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                recentDeaths.append(f"US35 - Error : Individual - {id} Birthday {deathstr} died recently")
+                recentDeaths.append(f"US36 - Error : Individual - {id} Birthday {deathstr} died recently")
     
     if recentDeaths:
         return(recentDeaths)
