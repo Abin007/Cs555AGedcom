@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-from datetime import datetime,date
+from datetime import datetime,date,timedelta
 import pickle
 import re
 
@@ -322,6 +322,28 @@ def StoryIDUS17():
     
 print(StoryIDUS17())
 
+def StoryIDUS15():
+    family={}
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        fam=[]
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        fam.append(row.get_string(fields=["Children"]).strip().replace('/',''))
+        family[id]=fam
+    for i in family:
+        childern= family[i][-1]
+        patterns= r'\w+'
+        if childern != 'N/A':
+            match= re.findall(patterns, childern)
+            child=[]
+            if (match[0]!='NA'):
+                if(len(match)>15):
+                    errors.append(f"US15 - Family {i} has more than 15 siblings")
+    return errors
+
+
 #___________________________________________________________________________________________________
 
 
@@ -448,4 +470,24 @@ def StoryIDUS31():
 print ('US31 - List of Living Single is -->')
 print(StoryIDUS31())
 
+def StoryIDUS35():
+    pastDate = (date.today()-timedelta(days=30)).isoformat()
+    recentBirths=[]
+    for row in x:
+        row.border = False
+        row.header = False
+        if((row.get_string(fields=["Birthday"]).strip()=='N/A')==False):
+            birthstr=row.get_string(fields=["Birthday"]).strip()
+            birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+            if(str(datetime.date(birth)) >= pastDate and datetime.date(birth) < date.today()):
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                recentBirths.append(f"US35 - Error : Individual - {id} Birthday {birthstr} is born recently")
+    
+    if recentBirths:
+        return(recentBirths)
+    else:
+        return('US35 - There are no recent births')
+
+print('Output for US35-->')
+print(StoryIDUS35())
 #_____________Prateek's code__________________________________________________________________________________________________________
