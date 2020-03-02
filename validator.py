@@ -420,6 +420,26 @@ def StoryIDUS02():
 
 
 print(StoryIDUS02())
+
+def StoryIDUS03():
+    errors=[]
+    for row1 in x:
+            row1.border = False
+            row1.header = False
+            id=(row1.get_string(fields=["ID"]).strip().replace('/',''))
+            if((row1.get_string(fields=["Birthday"]).strip())!='N/A'):
+                birthdays=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+                if((row1.get_string(fields=["Death"]).strip())!='N/A'):
+                    death=(datetime.strptime((row1.get_string(fields=["Death"]).strip()), '%d %b %Y'))
+                    if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
+                        errors.append(id)
+    if(len(errors)!=0):
+        errors=sorted(errors)
+        return f"US03 - Error : Individual - {errors} have birthdays before death"
+    else:
+        return "US03 - No errors found"
+print(StoryIDUS03())
+
    
 #_______________________________________________________________________________________________________________________________________
 
