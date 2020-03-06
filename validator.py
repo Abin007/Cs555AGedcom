@@ -354,7 +354,7 @@ def StoryIDUS15():
 
 
 
-#_________Tushar's stories_________________________________________________________________________________________________________________
+#_________tushr's storis_________________________________________________________________________________________________________________
 
 def StoryIDUS01():
     dates=[]
@@ -362,34 +362,34 @@ def StoryIDUS01():
     for row in x:
         row.border = False
         row.header = False
-        if((row.get_string(fields = ["Birthday"]).strip() == 'N/A') == False):
-            birthstr = row.get_string(fields = ["Birthday"]).strip()
-            birth = (datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+        if((row.get_string(fields=["Birthday"]).strip()=='N/A')==False):
+            birthstr=row.get_string(fields=["Birthday"]).strip()
+            birth=(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
-                id = (row.get_string(fields = ["ID"]).strip().replace('/',''))
-                errors.append(f"US01- Error : Individual - {id} Birthday {birthstr} occurs in the future")
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"US01 - Error : Individual - {id} Birthday {birthstr} occurs in the future")
 
-        if((row.get_string(fields = ["Death"]).strip() == 'N/A') == False):
-            birthstr = row.get_string(fields = ["Death"]).strip()
-            birth = (datetime.strptime((row.get_string(fields = ["Death"]).strip()), '%d %b %Y'))
+        if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
+            birthstr=row.get_string(fields=["Death"]).strip()
+            birth=(datetime.strptime((row.get_string(fields=["Death"]).strip()), '%d %b %Y'))
             if(datetime.date(birth) > date.today()):
-                id = (row.get_string(fields = ["ID"]).strip().replace('/',''))
-                errors.append(f"US01- Error : Individual - {id} Death {birthstr} occurs in the future")
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"US01 - Error : Individual - {id} Death {birthstr} occurs in the future")
     for row in y:
         row.border = False
         row.header = False
-        if((row.get_string(fields = ["Married"]).strip() == 'N/A') == False):
-            marriedstr = row.get_string(fields = ["Married"]).strip()
-            married = (datetime.strptime((row.get_string(fields = ["Married"]).strip()), '%d %b %Y'))
+        if((row.get_string(fields=["Married"]).strip()=='N/A')==False):
+            marriedstr=row.get_string(fields=["Married"]).strip()
+            married=(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
             if(datetime.date(married) > date.today()):
-                id = (row.get_string(fields = ["ID"]).strip().replace('/',''))
-                errors.append(f"US01- Error : Family ID - {id} Married {marriedstr} occurs in the future")
-        if((row.get_string(fields=["Divorced"]).strip() == 'N/A') == False):
-            deathstr = row.get_string(fields = ["Divorced"]).strip()
-            death = (datetime.strptime((row.get_string(fields = ["Divorced"]).strip()), '%d %b %Y'))
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"US01 - Error : Family ID - {id} Married {marriedstr} occurs in the future")
+        if((row.get_string(fields=["Divorced"]).strip()=='N/A')==False):
+            deathstr=row.get_string(fields=["Divorced"]).strip()
+            death=(datetime.strptime((row.get_string(fields=["Divorced"]).strip()), '%d %b %Y'))
             if(datetime.date(death) > date.today()):
-                id = (row.get_string(fields = ["ID"]).strip().replace('/',''))
-                errors.append(f"US01- Error : Family ID - {id} Divorced {deathstr} occurs in the future")
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                errors.append(f"US01 - Error : Family ID - {id} Divorced {deathstr} occurs in the future")
 
      
     for i in dates:
@@ -403,48 +403,28 @@ def StoryIDUS01():
 print(StoryIDUS01())
 
 def StoryIDUS02():
-    errors = []
+    errors=[]
     for row in y:
         row.border = False
         row.header = False
-        married = (datetime.strptime((row.get_string(fields = ["Married"]).strip()), '%d %b %Y'))
-        Husband = (row.get_string(fields = ["Husband ID"]).strip())
-        Wife = (row.get_string(fields = ["Wife ID"]).strip())
+        married=(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
+        Husband = (row.get_string(fields=["Husband ID"]).strip())
+        Wife = (row.get_string(fields=["Wife ID"]).strip())
         for row1 in x:
             row1.border = False
             row1.header = False
-            if row1.get_string(fields = ["ID"]).strip() == Husband:
-                husbanddate = (datetime.strptime((row1.get_string(fields = ["Birthday"]).strip()), '%d %b %Y'))
+            if row1.get_string(fields=["ID"]).strip() == Husband:
+                husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(husbanddate>married):
-                    errors.append(f"US02- Error : individual {Husband} birthdate {husbanddate} occurs after marriage {married}")
-            if row1.get_string(fields = ["ID"]).strip() == Wife:
-                wifebdate = (datetime.strptime((row1.get_string(fields = ["Birthday"]).strip()), '%d %b %Y'))
-                if(wifebdate > married):
-                    errors.append(f"US02- Error : individual {Wife} birthdate - {wifebdate} occurs after marriage {married}")
+                    errors.append(f"US02 - Error : individual {Husband} birthdate {husbanddate} occurs after marriage {married}")
+            if row1.get_string(fields=["ID"]).strip() == Wife:
+                wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+                if(wifebdate>married):
+                    errors.append(f"US02 - Error : individual {Wife} birthdate-{wifebdate} occurs after marriage {married}")
     return errors
 
 
 print(StoryIDUS02())
-
-def StoryIDUS03():
-    errors=[]
-    for row1 in x:
-            row1.border = False
-            row1.header = False
-            id=(row1.get_string(fields=["ID"]).strip().replace('/',''))
-            if((row1.get_string(fields=["Birthday"]).strip())!='N/A'):
-                birthdays=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
-                if((row1.get_string(fields=["Death"]).strip())!='N/A'):
-                    death=(datetime.strptime((row1.get_string(fields=["Death"]).strip()), '%d %b %Y'))
-                    if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
-                        errors.append(id)
-    if(len(errors)!=0):
-        errors=sorted(errors)
-        return f"US03 - Error : Individual - {errors} have birthdays before death"
-    else:
-        return "US03 - No errors found"
-print(StoryIDUS03())
-
    
 #_______________________________________________________________________________________________________________________________________
 
@@ -534,5 +514,6 @@ def StoryIDUS36():
         return('[ US36 - There are no recent deaths ]')
 
 print(StoryIDUS36())
-    
-#_____________Prateek's code__________________________________________________________________________________________________________
+
+
+#_____________Prateek's code_______________________________________________________________________________________________________________________
