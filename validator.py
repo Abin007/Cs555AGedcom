@@ -317,7 +317,12 @@ def StoryIDUS17():
             match= re.findall(patterns, childern)
             family[i].pop()
             family[i].append(match)
-    print(family)
+        if (family[i][0] in family[i][-1]) or (family[i][1] in family[i][-1]):
+            errors.append(f"US17 - Error : In Family {i} has parents who are married to their children ")
+    if errors:
+        return errors
+    else:
+        return "US17 - has no errors"
             
     
 print(StoryIDUS17())
