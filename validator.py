@@ -160,7 +160,10 @@ def StoryIDUS23():
         row.border = False
         row.header = False
         names.append(row.get_string(fields=["Name"]).strip().replace('/',''))
-        dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+        if (row.get_string(fields=["Birthday"]).strip()) != 'N/A':
+            dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+        else:
+            dob.append('N/A')
         id.append(row.get_string(fields=["ID"]).strip().replace('/',''))
     error=[]
     for i in range(0,len(names)):
@@ -348,11 +351,67 @@ def StoryIDUS15():
                     errors.append(f"US15 - Family {i} has more than 15 siblings")
     return errors
 
+def StoryIDUS21():
+    family={}
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        fam=[]
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        fam.append(row.get_string(fields=["Husband ID"]).strip().replace('/','').split(" ")[0])
+        fam.append(row.get_string(fields=["Wife ID"]).strip().replace('/','').split(" ")[0])
+        family[id]=fam
+    for i in family:
+        for row in x:
+            row.border = False
+            row.header = False
+            
+            if ((row.get_string(fields=["ID"]).strip()) == family[i][0]) and (row.get_string(fields=["Gender"]).strip()) != 'M' :
+                errors.append(f"US21 - Error : In Family {i} have parents of wrong gender")
+            elif ((row.get_string(fields=["ID"]).strip()) == family[i][1]) and (row.get_string(fields=["Gender"]).strip()) != 'F':
+                errors.append(f"US21 - Error : In Family {i} have parents of wrong gender")
+    return list(set(errors))
 
+def StoryIDUS22():
+    familyid=[]
+    indiid=[]
+    errors=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        familyid.append(row.get_string(fields=["ID"]).strip().replace('/',''))
+    for row in x:
+        row.border = False
+        row.header = False
+        indiid.append(row.get_string(fields=["ID"]).strip().replace('/',''))
+    if(len(list(set(familyid)))!=len(familyid)):
+        errors.append("US22 - Error : Family IDs is not Unique") 
+    if(len(list(set(indiid)))!=len(indiid)):
+        errors.append("US22 - Error : Individual IDs is not Unique")
+    if errors:
+        return errors
+    else:
+        return "US22 - No errors found"
+        
+print(StoryIDUS22())
 #___________________________________________________________________________________________________
+def StoryIDUS27():
+    error=[]
+    for row in x:
+        row.border = False
+        row.header = False
+        id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+        if(row.get_string(fields=["Age"]).strip()=='N/A'):
+            error.append(id)
+    error=sorted(error)
+    if error:
+        return f"US27 - Error : Individual {error} has no ages displayed"
+    else:
+        return "US27 - No errors found"
 
 
-
+print(StoryIDUS27())
 
 #_________tushr's storis_________________________________________________________________________________________________________________
 
@@ -414,11 +473,13 @@ def StoryIDUS02():
             row1.border = False
             row1.header = False
             if row1.get_string(fields=["ID"]).strip() == Husband:
-                husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+                if (row1.get_string(fields=["Birthday"]).strip())!='N/A':
+                    husbanddate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(husbanddate>married):
                     errors.append(f"US02 - Error : individual {Husband} birthdate {husbanddate} occurs after marriage {married}")
             if row1.get_string(fields=["ID"]).strip() == Wife:
-                wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+                if (row1.get_string(fields=["Birthday"]).strip())!='N/A':
+                    wifebdate=(datetime.strptime((row1.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
                 if(wifebdate>married):
                     errors.append(f"US02 - Error : individual {Wife} birthdate-{wifebdate} occurs after marriage {married}")
     return errors
