@@ -520,7 +520,7 @@ def StoryIDUS04():
                         errors.append(id)
     if(len(errors) != 0):
         errors = sorted(errors)
-        return f" US04 - Error : Individual - {errors} have been married before divorce "
+        return f" US04 - Error : Family - {errors} have been married after divorce "
     else:
         return " US04 - No errors found "
 print(StoryIDUS04())
