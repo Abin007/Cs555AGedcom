@@ -394,8 +394,8 @@ def StoryIDUS22():
     else:
         return "US22 - No errors found"
         
-print(StoryIDUS22())
-#___________________________________________________________________________________________________
+# print(StoryIDUS22())
+
 def StoryIDUS27():
     error=[]
     for row in x:
@@ -411,7 +411,7 @@ def StoryIDUS27():
         return "US27 - No errors found"
 
 
-print(StoryIDUS27())
+# print(StoryIDUS27())
 
 #_________tushr's storis_________________________________________________________________________________________________________________
 
