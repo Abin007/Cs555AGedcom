@@ -58,13 +58,13 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS01(),['US01 - Error : Individual - I15 Birthday 3 MAR 2021 occurs in the future'])
 
     def test_story_us02(self):
-        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : Individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00', 'US02 - Error : individual I15 birthdate-2021-03-03 00:00:00 occurs after marriage 2015-07-19 00:00:00'])
+        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00', 'US02 - Error : individual I15 birthdate-2021-03-03 00:00:00 occurs after marriage 2015-07-19 00:00:00'])
     
     def test_story_us03(self):
-        self.assertEqual(validator.StoryIDUS03(),['US03 - Error : Individual - I5 have death before birthday'])
+        self.assertEqual(validator.StoryIDUS03(),'US03 - Error : Individual - I5 have death before birthday')
 
     def test_story_us04(self):
-        self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Family - F3 have been married after divorce'])
+        self.assertEqual(validator.StoryIDUS04(),'US04 - Error : Family - F3 have been divorced before marriage')
     
     def test_story_us35(self):
         self.assertEqual(validator.StoryIDUS35(),'[ US35 - There are no recent births ]')
@@ -72,8 +72,7 @@ class fooTest(unittest.TestCase):
     def test_story_us36(self):
         self.assertEqual(validator.StoryIDUS36(),'[ US36 - There are no recent deaths ]')
 
-    def test_story_us04(self):
-        self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Individual F2 had their divorce occuring before their marriage'])
+    
 
         
         
