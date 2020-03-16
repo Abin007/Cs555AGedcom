@@ -7,7 +7,7 @@ x= PrettyTable()
 y= PrettyTable()
 lines=[]
 outputlines=[]
-with open('/Users/apple/Documents/GitHub/Cs555AGedcom/Family-2-26-Feb-2020-844.ged') as line:
+with open('Family-2-21-Feb-2020-525.ged') as line:
     lines=line.read().splitlines()
 
 tagdictionary={
