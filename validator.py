@@ -299,7 +299,7 @@ def StoryIDUS16():
 
 
 print(StoryIDUS16())
-
+#US-17 - Parents married to their children
 def StoryIDUS17():
     family={}
     errors=[]
@@ -499,11 +499,11 @@ def StoryIDUS03():
                 birthdays = (datetime.strptime((row1.get_string(fields = ["Birthday"]).strip()), '%d %b %Y'))
                 if((row1.get_string(fields = ["Death"]).strip()) != 'N/A'):
                     death = (datetime.strptime((row1.get_string(fields = ["Death"]).strip()), '%d %b %Y'))
-                     if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
+                    if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
                         errors.append(id)
     if(len(errors) != 0):
-        errors = sorted(errors)
-        return f" US03 - Error : Individual - {errors} have death before birthday "
+        # errors = sorted(errors)
+        return errors
     else:
         return " US03 - No errors found "
 print(StoryIDUS03())
@@ -519,7 +519,7 @@ def StoryIDUS04():
             if((row1.get_string(fields = ["Divorced"]).strip()) != 'N/A'):
                 divorce = (datetime.strptime((row1.get_string(fields = ["Divorced"]).strip()), '%d %b %Y'))
                 if(datetime.date(married) > datetime.date(divorce)):
-                        errors.append(id)
+                        errors.append(f"US04 - Error : Family - {id} have been married after divorce")
     if(len(errors) != 0):
         errors = sorted(errors)
 
