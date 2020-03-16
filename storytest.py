@@ -66,5 +66,10 @@ class fooTest(unittest.TestCase):
     def test_story_us04(self):
         self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Individual F2 had their divorce occuring before their marriage'])
 
+    def test_story_us04(self):
+        self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Individual F2 had their divorce occuring before their marriage'])
+
+        
+        
 if __name__=='__main__':
     unittest.main()

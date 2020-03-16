@@ -417,7 +417,6 @@ print(StoryIDUS27())
 
 #_________Tushar's storis_________________________________________________________________________________________________________________
 
-#
 def StoryIDUS01():
     dates=[]
     errors=[]
@@ -500,7 +499,7 @@ def StoryIDUS03():
                 birthdays = (datetime.strptime((row1.get_string(fields = ["Birthday"]).strip()), '%d %b %Y'))
                 if((row1.get_string(fields = ["Death"]).strip()) != 'N/A'):
                     death = (datetime.strptime((row1.get_string(fields = ["Death"]).strip()), '%d %b %Y'))
-                    if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
+                     if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
                         errors.append(id)
     if(len(errors) != 0):
         errors = sorted(errors)
