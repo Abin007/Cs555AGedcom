@@ -501,7 +501,8 @@ def StoryIDUS03():
                         errors.append(id)
     if(len(errors) != 0):
         errors = sorted(errors)
-        return f" US03 - Error : Individual - {errors} have death before birthday "
+        strerror=" ".join(errors)
+        return f"US03 - Error : Individual - {strerror} have death before birthday "
     else:
         return " US03 - No errors found "
 print(StoryIDUS03())
@@ -520,7 +521,8 @@ def StoryIDUS04():
                         errors.append(id)
     if(len(errors) != 0):
         errors = sorted(errors)
-        return f" US04 - Error : Family - {errors} have been married after divorce "
+        strerror=" ".join(errors)
+        return f"US04 - Error : Family - {strerror} have been married after divorce "
     else:
         return " US04 - No errors found "
 print(StoryIDUS04())
