@@ -300,7 +300,6 @@ def StoryIDUS16():
         return "US16 - No Family has male members with different last names"
 
 
-
 print(StoryIDUS16())
 #US-17 - Parents married to their children
 def StoryIDUS17():
