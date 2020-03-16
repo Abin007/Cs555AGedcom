@@ -7,7 +7,7 @@ x= PrettyTable()
 y= PrettyTable()
 lines=[]
 outputlines=[]
-with open('Family-2-21-Feb-2020-525.ged') as line:
+with open('/Users/apple/Documents/GitHub/Cs555AGedcom/Family-2-26-Feb-2020-844.ged') as line:
     lines=line.read().splitlines()
 
 tagdictionary={
@@ -348,7 +348,7 @@ def StoryIDUS15():
         patterns= r'\w+'
         if childern != 'N/A':
             match= re.findall(patterns, childern)
-            child=[]
+          #  child=[]
             if (match[0]!='NA'):
                 if(len(match)>15):
                     errors.append(f"US15 - Family {i} has more than 15 siblings")
@@ -396,7 +396,8 @@ def StoryIDUS22():
         return errors
     else:
         return "US22 - No errors found"
-        
+print(StoryIDUS22())
+#___________________________________________________________________________________________________
 # print(StoryIDUS22())
 
 def StoryIDUS27():
@@ -413,10 +414,11 @@ def StoryIDUS27():
     else:
         return "US27 - No errors found"
 
+print(StoryIDUS27())
 
 # print(StoryIDUS27())
 
-#_________Tushar's stories_________________________________________________________________________________________________________________
+#_________Tushar's storis_________________________________________________________________________________________________________________
 
 def StoryIDUS01():
     dates=[]
@@ -501,7 +503,7 @@ def StoryIDUS03():
                 if((row1.get_string(fields = ["Death"]).strip()) != 'N/A'):
                     death = (datetime.strptime((row1.get_string(fields = ["Death"]).strip()), '%d %b %Y'))
                     if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
-                        errors.append(f"US03 - Error : Individual - {id} have death before birthday")
+                        errors.append(id)
     if(len(errors) != 0):
         # errors = sorted(errors)
         return errors
@@ -522,15 +524,14 @@ def StoryIDUS04():
                 if(datetime.date(married) > datetime.date(divorce)):
                         errors.append(f"US04 - Error : Family - {id} have been married after divorce")
     if(len(errors) != 0):
-        # errors = sorted(errors)
-        return errors
+        errors = sorted(errors)
+
+        return f" US04 - Error : Family - {errors} have been divorced before marriage "
     else:
         return " US04 - No errors found "
 print(StoryIDUS04())
-    
-    
+#___________________________________________________________________________________________________________________________________________
 
-#_______________________________________________________________________________________________________________________________________
 
 def StoryIDUS30():
     livingMarried = PrettyTable()
