@@ -60,11 +60,12 @@ class fooTest(unittest.TestCase):
     def test_story_us02(self):
         self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00', 'US02 - Error : individual I15 birthdate-2021-03-03 00:00:00 occurs after marriage 2015-07-19 00:00:00'])
 
-    def test_story_us35(self):
-        self.assertEqual(validator.StoryIDUS35(),'[ US35 - There are no recent births ]')
-    
-    def test_story_us36(self):
-        self.assertEqual(validator.StoryIDUS36(),'[ US36 - There are no recent deaths ]')
+    def test_story_us03(self):
+        self.assertEqual(validator.StoryIDUS03(),['US03 - Error : Individual I5 death occurs before birthday'])
+
+    def test_story_us04(self):
+        self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Individual F2 had their divorce occuring before their marriage'])
+
         
         
 if __name__=='__main__':
