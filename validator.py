@@ -413,7 +413,7 @@ def StoryIDUS27():
 
 # print(StoryIDUS27())
 
-#_________tushr's storis_________________________________________________________________________________________________________________
+#_________Tushar's stories_________________________________________________________________________________________________________________
 
 def StoryIDUS01():
     dates=[]
@@ -501,7 +501,7 @@ def StoryIDUS03():
                         errors.append(id)
     if(len(errors) != 0):
         errors = sorted(errors)
-        return f" US03 - Error : Individual - {errors} have birthdays before death "
+        return f" US03 - Error : Individual - {errors} have death before birthday "
     else:
         return " US03 - No errors found "
 print(StoryIDUS03())
