@@ -7,7 +7,7 @@ x= PrettyTable()
 y= PrettyTable()
 lines=[]
 outputlines=[]
-with open('Family-2-26-Feb-2020-844.ged') as line:
+with open('/Users/apple/Documents/GitHub/Cs555AGedcom/Family-2-26-Feb-2020-844.ged') as line:
     lines=line.read().splitlines()
 
 tagdictionary={
@@ -302,7 +302,7 @@ print(StoryIDUS16())
 
 def StoryIDUS17():
     family={}
-   # errors=[]
+    errors=[]
     for row in y:
         row.border = False
         row.header = False
@@ -393,9 +393,10 @@ def StoryIDUS22():
         return errors
     else:
         return "US22 - No errors found"
-        
 print(StoryIDUS22())
 #___________________________________________________________________________________________________
+# print(StoryIDUS22())
+
 def StoryIDUS27():
     error=[]
     for row in x:
@@ -410,11 +411,12 @@ def StoryIDUS27():
     else:
         return "US27 - No errors found"
 
-
 print(StoryIDUS27())
 
-#_________tushar's stories_________________________________________________________________________________________________________________
 
+#_________Tushar's storis_________________________________________________________________________________________________________________
+
+#
 def StoryIDUS01():
     dates=[]
     errors=[]
@@ -486,7 +488,7 @@ def StoryIDUS02():
 
 
 print(StoryIDUS02())
-
+  
 def StoryIDUS03():
     errors=[]
     for row1 in x:
@@ -501,7 +503,7 @@ def StoryIDUS03():
                         errors.append(id)
     if(len(errors) != 0):
         errors = sorted(errors)
-        return f" US03 - Error : Individual - {errors} have birthdays before death "
+        return f" US03 - Error : Individual - {errors} have death before birthday "
     else:
         return " US03 - No errors found "
 print(StoryIDUS03())
@@ -520,12 +522,13 @@ def StoryIDUS04():
                         errors.append(id)
     if(len(errors) != 0):
         errors = sorted(errors)
-        return f" US04 - Error : Individual - {errors} have been married before divorce "
+
+        return f" US04 - Error : Family - {errors} have been divorced before marriage "
     else:
         return " US04 - No errors found "
 print(StoryIDUS04())
+#___________________________________________________________________________________________________________________________________________
 
-#_______________________________________________________________________________________________________________________________________
 
 def StoryIDUS30():
     livingMarried = PrettyTable()

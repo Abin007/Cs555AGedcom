@@ -8,15 +8,21 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS23(),['US23 - Error : Individual I1 and I16 Might be the same'])
 
     def test_story_us25(self):
-        us25=set()
+        #us25=set()
         self.assertEqual(validator.StoryIDUS25(),['US25 - Error : Individual I1 I16 might be the same  in Family F4'])
+
+    def test_story_us16(self):
+        self.assertEqual(validator.StoryIDUS16(),['US16 - Error : Family F6 has male members with different last names'])
+
+    def test_story_us17(self):
+        self.assertEqual(validator.StoryIDUS17(),['US17 - Error : In Family F6 has parents who are married to their children '])
     
     def test_story_us30(self):
         x = PrettyTable()
         x.field_names = ['Husband ID', 'Husband Name', 'Wife ID', 'Wife Name']
         x.add_row(['I2', 'Kanye /West/', 'I1', 'Kim /Kardashian/'])
         x.add_row(['I7', 'Bruce /Jenner/', 'I6', 'Kris /Jenner/'])
-        x.add_row(['I13', 'Travis /Scott/', 'I12', 'Kylie /Jenner/'])
+        x.add_row(['I13', 'Travis /Scott/', 'I15', 'Stormi /Webster/'])
         self.assertEqual(str(validator.StoryIDUS30()), str(x))
         y = PrettyTable()
         y.field_names = ['Husband ID', 'Husband Name', 'Wife ID', 'Wife Name']
@@ -52,8 +58,13 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS01(),['US01 - Error : Individual - I15 Birthday 3 MAR 2021 occurs in the future'])
 
     def test_story_us02(self):
-        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00'])
+        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : Individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00', 'US02 - Error : individual I15 birthdate-2021-03-03 00:00:00 occurs after marriage 2015-07-19 00:00:00'])
+    
+    def test_story_us03(self):
+        self.assertEqual(validator.StoryIDUS03(),['US03 - Error : Individual I5 death occurs before birthday'])
 
+    def test_story_us04(self):
+        self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Individual F2 had their divorce occuring before their marriage'])
 
 if __name__=='__main__':
     unittest.main()
