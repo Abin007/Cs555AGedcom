@@ -296,6 +296,9 @@ def StoryIDUS16():
     
     if(len(errors)>0):
         return sorted(errors)
+    else:
+        return "US16 - No Family has male members with different last names"
+
 
 
 print(StoryIDUS16())
@@ -325,7 +328,7 @@ def StoryIDUS17():
     if errors:
         return errors
     else:
-        return "US17 - has no errors"
+        return "US17 - No Parents are married to their children"
             
     
 print(StoryIDUS17())
