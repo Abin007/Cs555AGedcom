@@ -65,6 +65,12 @@ class fooTest(unittest.TestCase):
 
     def test_story_us04(self):
         self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Individual F2 had their divorce occuring before their marriage'])
+    
+    def test_story_us35(self):
+        self.assertEqual(validator.StoryIDUS35(),'[ US35 - There are no recent births ]')
+    
+    def test_story_us36(self):
+        self.assertEqual(validator.StoryIDUS36(),'[ US36 - There are no recent deaths ]')
 
         
         
