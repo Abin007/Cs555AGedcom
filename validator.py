@@ -395,7 +395,7 @@ def StoryIDUS22():
         return errors
     else:
         return "US22 - No errors found"
-print(StoryIDUS22())
+#print(StoryIDUS22())
 #___________________________________________________________________________________________________
 
 def StoryIDUS27():
@@ -412,7 +412,7 @@ def StoryIDUS27():
     else:
         return "US27 - No errors found"
 
-print(StoryIDUS27())
+#print(StoryIDUS27())
 
 
 #_________Tushar's storis_________________________________________________________________________________________________________________
