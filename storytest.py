@@ -8,7 +8,7 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS23(),['US23 - Error : Individual I1 and I16 Might be the same'])
 
     def test_story_us25(self):
-        us25=set()
+        #us25=set()
         self.assertEqual(validator.StoryIDUS25(),['US25 - Error : Individual I1 I16 might be the same  in Family F4'])
 
     def test_story_us16(self):
@@ -61,16 +61,18 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I2 birthdate 2020-02-29 00:00:00 occurs after marriage 2014-07-15 00:00:00', 'US02 - Error : individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00', 'US02 - Error : individual I15 birthdate-2021-03-03 00:00:00 occurs after marriage 2015-07-19 00:00:00'])
 
     def test_story_us03(self):
-        self.assertEqual(validator.StoryIDUS03(),['US03 - Error : Individual - I5 have death before birthday'])
+        self.assertEqual(validator.StoryIDUS03(),'US03 - Error : Individual - I5 have death before birthday')
 
     def test_story_us04(self):
-        self.assertEqual(validator.StoryIDUS04(),['US04 - Error : Family - F3 have been married after divorce'])
+        self.assertEqual(validator.StoryIDUS04(),'US04 - Error : Family - F3 have been divorced before marriage')
     
     def test_story_us35(self):
         self.assertEqual(validator.StoryIDUS35(),['US35 - Error : Individual - I2 Birthday 29 FEB 2020 is born recently'])
     
     def test_story_us36(self):
         self.assertEqual(validator.StoryIDUS36(),['US36 - Error : Individual - I8 Birthday 9 MAR 2020 died recently'])
+
+    
 
         
         

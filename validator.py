@@ -296,10 +296,12 @@ def StoryIDUS16():
     
     if(len(errors)>0):
         return sorted(errors)
+    else:
+        return "US16 - No Family has male members with different last names"
 
 
 print(StoryIDUS16())
-
+#US-17 - Parents married to their children
 def StoryIDUS17():
     family={}
     errors=[]
@@ -325,7 +327,7 @@ def StoryIDUS17():
     if errors:
         return errors
     else:
-        return "US17 - has no errors"
+        return "US17 - No Parents are married to their children"
             
     
 print(StoryIDUS17())
@@ -345,7 +347,7 @@ def StoryIDUS15():
         patterns= r'\w+'
         if childern != 'N/A':
             match= re.findall(patterns, childern)
-            child=[]
+          #  child=[]
             if (match[0]!='NA'):
                 if(len(match)>15):
                     errors.append(f"US15 - Family {i} has more than 15 siblings")
@@ -393,8 +395,8 @@ def StoryIDUS22():
         return errors
     else:
         return "US22 - No errors found"
-        
-# print(StoryIDUS22())
+print(StoryIDUS22())
+#___________________________________________________________________________________________________
 
 def StoryIDUS27():
     error=[]
@@ -410,10 +412,10 @@ def StoryIDUS27():
     else:
         return "US27 - No errors found"
 
+print(StoryIDUS27())
 
-# print(StoryIDUS27())
 
-#_________Tushar's stories_________________________________________________________________________________________________________________
+#_________Tushar's storis_________________________________________________________________________________________________________________
 
 def StoryIDUS01():
     dates=[]
@@ -498,10 +500,10 @@ def StoryIDUS03():
                 if((row1.get_string(fields = ["Death"]).strip()) != 'N/A'):
                     death = (datetime.strptime((row1.get_string(fields = ["Death"]).strip()), '%d %b %Y'))
                     if(datetime.date(birthdays)>datetime.date(death) or datetime.date(birthdays) > date.today()):
-                        errors.append(f"US03 - Error : Individual - {id} have death before birthday")
+                        errors.append(id)
     if(len(errors) != 0):
-        # errors = sorted(errors)
-        return errors
+        strerror=" ".join(errors)
+        return f'US03 - Error : Individual - {strerror} have death before birthday'
     else:
         return " US03 - No errors found "
 print(StoryIDUS03())
@@ -517,17 +519,16 @@ def StoryIDUS04():
             if((row1.get_string(fields = ["Divorced"]).strip()) != 'N/A'):
                 divorce = (datetime.strptime((row1.get_string(fields = ["Divorced"]).strip()), '%d %b %Y'))
                 if(datetime.date(married) > datetime.date(divorce)):
-                        errors.append(f"US04 - Error : Family - {id} have been married after divorce")
+                        errors.append(id)
     if(len(errors) != 0):
-        # errors = sorted(errors)
-        return errors
+        errors = sorted(errors)
+        strerror=" ".join(errors)
+        return f"US04 - Error : Family - {strerror} have been divorced before marriage"
     else:
         return " US04 - No errors found "
 print(StoryIDUS04())
-    
-    
+#___________________________________________________________________________________________________________________________________________
 
-#_______________________________________________________________________________________________________________________________________
 
 def StoryIDUS30():
     livingMarried = PrettyTable()
