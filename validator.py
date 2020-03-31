@@ -351,7 +351,11 @@ def StoryIDUS15():
             if (match[0]!='NA'):
                 if(len(match)>15):
                     errors.append(f"US15 - Family {i} has more than 15 siblings")
-    return errors
+    if errors:
+        return errors
+    else:
+        return "US15 - No errors detected"
+print(StoryIDUS15())
 
 def StoryIDUS21():
     family={}
@@ -373,7 +377,11 @@ def StoryIDUS21():
                 errors.append(f"US21 - Error : In Family {i} have parents of wrong gender")
             elif ((row.get_string(fields=["ID"]).strip()) == family[i][1]) and (row.get_string(fields=["Gender"]).strip()) != 'F':
                 errors.append(f"US21 - Error : In Family {i} have parents of wrong gender")
-    return list(set(errors))
+    if errors:
+        return sorted(list(set(errors)))
+    else:
+        return "US21 - No Errors"
+print(StoryIDUS21())
 
 def StoryIDUS22():
     familyid=[]
