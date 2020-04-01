@@ -679,4 +679,60 @@ def StoryIDUS36():
 print(StoryIDUS36())
 
 
+def StoryIDUS38():
+    pastDate = (date.today()+timedelta(days=30))
+    recentDeaths=[]
+    for row in x:
+        row.border = False
+        row.header = False
+        if(row.get_string(fields=["Death"]).strip()=='N/A'):
+            birth=datetime.date(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+            yy=date.today().year
+            birth=birth.replace(year=yy)
+            if((birth) <= pastDate and birth>=date.today() ):
+                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                recentDeaths.append(f"US38 - Error : Individual - {id} have Birthdays in the next 30 days-{birth} ")
+            
+    
+    if recentDeaths:
+        return recentDeaths
+    else:
+        return('[ US38 - There are no recent birthdays]')
+
+print(StoryIDUS38())
+
+def StoryIDUS39():
+    pastDate = (date.today()+timedelta(days=30))
+    recentDeaths=[]
+    for row in y:
+        row.border = False
+        row.header = False
+        if(row.get_string(fields=["Divorced"]).strip()=='N/A'):
+            married=datetime.date(datetime.strptime((row.get_string(fields=["Married"]).strip()), '%d %b %Y'))
+            yy=date.today().year
+            married=married.replace(year=yy)
+            if((married) <= pastDate and married>=date.today() ):
+                husid=(row.get_string(fields=["Husband ID"]).strip())
+                wifeid=(row.get_string(fields=["Wife ID"]).strip())
+                isalive=True
+                for row in x:
+                    row.border = False
+                    row.header = False
+                    id=row.get_string(fields=["ID"]).strip()
+                    if(id == husid or id == wifeid):
+                        if(row.get_string(fields=["Death"]).strip()!='N/A'):
+                            isalive=False
+                if(isalive==True):
+                    recentDeaths.append(f"US39 - Error : Couple - {husid},{wifeid} have anniversaries in the next 30 days")
+    
+    if recentDeaths:
+        return recentDeaths
+    else:
+        return('[ US39 - There are no recent anniversaries]')
+
+print(StoryIDUS39())
+
+
+
+
 #_____________Prateek's code_______________________________________________________________________________________________________________________

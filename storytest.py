@@ -77,7 +77,7 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS01(),['US01 - Error : Individual - I14 Birthday 3 MAR 2021 occurs in the future'])
 
     def test_story_us02(self):
-        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I2 birthdate 2020-02-29 00:00:00 occurs after marriage 2014-07-15 00:00:00', 'US02 - Error : individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00', 'US02 - Error : individual I14 birthdate-2021-03-03 00:00:00 occurs after marriage 2015-07-19 00:00:00'])
+        self.assertEqual(validator.StoryIDUS02(),['US02 - Error : individual I2 birthdate 2020-02-29 00:00:00 occurs after marriage 2014-07-15 00:00:00', 'US02 - Error : individual I6 birthdate-1955-11-05 00:00:00 occurs after marriage 1954-05-05 00:00:00', 'US02 - Error : individual I14 birthdate-2021-03-03 00:00:00 occurs after marriage 2015-04-19 00:00:00'])
 
     def test_story_us03(self):
         self.assertEqual(validator.StoryIDUS03(),'US03 - Error : Individual - I5 have death before birthday')
@@ -97,7 +97,12 @@ class fooTest(unittest.TestCase):
     def test_story_us36(self):
         self.assertEqual(validator.StoryIDUS36(),['US36 - Error : Individual - I8 Birthday 9 MAR 2020 died recently'])
 
-    
+    def test_story_us38(self):
+        self.assertEqual(validator.StoryIDUS38(),['US38 - Error : Individual - I4 have Birthdays in the next 30 days-2020-04-05 ', 'US38 - Error : Individual - I9 have Birthdays in the next 30 days-2020-04-18 ', 'US38 - Error : Individual - I13 have Birthdays in the next 30 days-2020-04-20 ', 'US38 - Error : Individual - I22 have Birthdays in the next 30 days-2020-04-08 ', 'US38 - Error : Individual - I26 have Birthdays in the next 30 days-2020-04-04 '])
+
+    def test_story_us39(self):
+        self.assertEqual(validator.StoryIDUS39(),['US39 - Error : Couple - I13,I14 have anniversaries in the next 30 days'])
+
 
         
         
