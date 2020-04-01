@@ -691,7 +691,7 @@ def StoryIDUS38():
             birth=birth.replace(year=yy)
             if((birth) <= pastDate and birth>=date.today() ):
                 id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                recentDeaths.append(f"US38 - Error : Individual - {id} have Birthdays in the next 30 days-{birth} ")
+                recentDeaths.append(f"US38 - Individual - {id} have Birthdays in the next 30 days-{birth} ")
             
     
     if recentDeaths:
@@ -723,7 +723,7 @@ def StoryIDUS39():
                         if(row.get_string(fields=["Death"]).strip()!='N/A'):
                             isalive=False
                 if(isalive==True):
-                    recentDeaths.append(f"US39 - Error : Couple - {husid},{wifeid} have anniversaries in the next 30 days")
+                    recentDeaths.append(f"US39 - Couple - {husid},{wifeid} have anniversaries in the next 30 days")
     
     if recentDeaths:
         return recentDeaths
