@@ -562,6 +562,32 @@ def StoryIDUS05():
         return "US05 - No errors found "
 print(StoryIDUS05())
 
+def StoryIDUS06():
+    errors=[]
+    for row2 in y:
+        row2.border = False
+        row2.header = False
+        if((row2.get_string(fields = ["Divorced"]).strip()) != 'N/A'):
+            divorce = (datetime.strptime((row2.get_string(fields = ["Divorced"]).strip()), '%d %b %Y'))
+            husid = (row2.get_string(fields = ["Husband ID"])).strip()
+            wifeid = (row2.get_string(fields = ["Wife ID"])).strip()
+            for row in x:
+                row.border = False
+                row.header = False
+                id = (row.get_string(fields = ["ID"]).strip().replace('/',''))
+                if(husid==id or wifeid==id ):
+                    if((row.get_string(fields = ["Death"]).strip()) != 'N/A'):
+                        death = (datetime.strptime((row.get_string(fields = ["Death"]).strip()), '%d %b %Y'))
+                        if(datetime.date(divorce) > datetime.date(death)):
+                            errors.append(id)
+    
+    if(len(errors) != 0):
+        strerror=" ".join(errors)
+        return f'US06 - Error : Individual - {strerror} have death before divorce'
+    else:
+        return "US06 - No errors found "
+print(StoryIDUS06())
+
 #___________________________________________________________________________________________________________________________________________
 
 
