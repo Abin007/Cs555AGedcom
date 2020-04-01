@@ -97,11 +97,7 @@ class fooTest(unittest.TestCase):
     def test_story_us36(self):
         self.assertEqual(validator.StoryIDUS36(),['US36 - Error : Individual - I8 Birthday 9 MAR 2020 died recently'])
 
-    def test_story_us38(self):
-        self.assertEqual(validator.StoryIDUS38(),['US38 - Individual - I4 have Birthdays in the next 30 days-2020-04-05 ', 'US38 - Individual - I9 have Birthdays in the next 30 days-2020-04-18 ', 'US38 - Individual - I13 have Birthdays in the next 30 days-2020-04-20 ', 'US38 - Individual - I22 have Birthdays in the next 30 days-2020-04-08 ', 'US38 - Individual - I26 have Birthdays in the next 30 days-2020-04-04 '])
 
-    def test_story_us39(self):
-        self.assertEqual(validator.StoryIDUS39(),['US39 - Couple - I13,I14 have anniversaries in the next 30 days'])
 
 
         
