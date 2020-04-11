@@ -95,13 +95,16 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS35(),['US35 - Error : Individual - I18 Birthday 30 MAR 2020 is born recently'])
     
     def test_story_us36(self):
-        self.assertEqual(validator.StoryIDUS36(),['US36 - Error : Individual - I8 Birthday 9 MAR 2020 died recently'])
+        self.assertEqual(validator.StoryIDUS36(),'[ US36 - There are no recent deaths ]')
 
     def test_story_us38(self):
-        self.assertEqual(validator.StoryIDUS38(),['US38 - Individual - I4 have Birthdays in the next 30 days-2020-04-05 ', 'US38 - Individual - I9 have Birthdays in the next 30 days-2020-04-18 ', 'US38 - Individual - I13 have Birthdays in the next 30 days-2020-04-20 ', 'US38 - Individual - I22 have Birthdays in the next 30 days-2020-04-08 ', 'US38 - Individual - I26 have Birthdays in the next 30 days-2020-04-04 '])
+        self.assertEqual(validator.StoryIDUS38(),['US38 - Individual - I9 have Birthdays in the next 30 days-2020-04-18 ', 'US38 - Individual - I13 have Birthdays in the next 30 days-2020-04-20 ', 'US38 - Individual - I19 have Birthdays in the next 30 days-2020-05-02 '])
 
     def test_story_us39(self):
-        self.assertEqual(validator.StoryIDUS39(),['US39 - Couple - I13,I14 have anniversaries in the next 30 days'])
+        self.assertEqual(validator.StoryIDUS39(),['US39 - Couple - I7,I6 have anniversaries in the next 30 days', 'US39 - Couple - I13,I14 have anniversaries in the next 30 days'])
+            
+    def test_story_us32(self):
+        self.assertEqual(validator.StoryIDUS32(),['US32 - Multiple Births - 21 OCT 1980 is a multiple birthdate.'])
 
 
         
