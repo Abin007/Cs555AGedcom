@@ -105,6 +105,9 @@ class fooTest(unittest.TestCase):
             
     def test_story_us32(self):
         self.assertEqual(validator.StoryIDUS32(),['US32 - Multiple Births - 21 OCT 1980 is a multiple birthdate.'])
+    
+    def test_story_us42(self):
+        self.assertEqual(validator.StoryIDUS42(),['US42 - There are no Illegitimate Dates'])
 
 
         
