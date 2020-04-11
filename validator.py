@@ -3,8 +3,8 @@ from datetime import datetime,date,timedelta
 import pickle
 import re
 
-x= PrettyTable()
-y= PrettyTable()
+x= PrettyTable() #Individuals
+y= PrettyTable() #Families
 lines=[]
 outputlines=[]
 with open('Family-2-21-Feb-2020-525.ged') as line:
@@ -731,4 +731,82 @@ def StoryIDUS39():
 
 print(StoryIDUS39())
 
+
+def validDate(tareek):
+    dd,mm,yy = tareek.split(' ')
+    datetime_object = datetime.strptime(mm, "%b")
+    month_number = datetime_object.month
+    correctDate = None
+    try:
+        datetime(int(yy),int(month_number),int(dd))
+        correctDate = True
+    except ValueError:
+        correctDate = False
+    return correctDate 
+    
+def StoryIDUS42():
+    rejectedDates = []
+    for row in x:
+        row.border = False
+        row.header = False
+        if((row.get_string(fields=["Birthday"]).strip()=='N/A')==False):
+            datestr=row.get_string(fields=["Birthday"]).strip()
+            vd = validDate(datestr)
+            if vd == False:
+                rejectedDates.append(f"US42 - Illegitimate Dates - {datestr} is an invalid date.")
+        if((row.get_string(fields=["Death"]).strip()=='N/A')==False):
+            datestr=row.get_string(fields=["Death"]).strip()
+            vd = validDate(datestr)
+            if vd == False:
+                rejectedDates.append(f"US42 - Illegitimate Dates - {datestr} is an invalid date.")
+    
+    for row in y:    
+        row.border = False
+        row.header = False
+        if((row.get_string(fields=["Divorced"]).strip()=='N/A')==False):
+            datestr=row.get_string(fields=["Divorced"]).strip()
+            vd = validDate(datestr)
+            if vd == False:
+                rejectedDates.append(f"US42 - Illegitimate Dates - {datestr} is an invalid date.")
+        if((row.get_string(fields=["Married"]).strip()=='N/A')==False):
+            datestr=row.get_string(fields=["Married"]).strip()
+            vd = validDate(datestr)
+            if vd == False:
+                rejectedDates.append(f"US42 - Illegitimate Dates - {datestr} is an invalid date.")
+    
+    if rejectedDates:
+        return rejectedDates
+    else:
+        return(['US42 - There are no Illegitimate Dates'])  
+
+print(StoryIDUS42())
+
+def StoryIDUS32():
+    multipleBirths = []
+    totalBirths = []
+    for row in x:
+        row.border = False
+        row.header = False
+        if((row.get_string(fields=["Birthday"]).strip()=='N/A')==False):
+            birthstr = row.get_string(fields=["Birthday"]).strip()
+            totalBirths.append(birthstr)
+    all_freq = {} 
+    for i in totalBirths: 
+        if i in all_freq: 
+            all_freq[i] += 1
+        else: 
+            all_freq[i] = 1
+    for i in all_freq:
+        if(all_freq[i]>=2):
+            multipleBirths.append(f"US32 - Multiple Births - {i} is a multiple birthdate.")
+    
+    if multipleBirths:
+        return multipleBirths
+    else:
+        return(['US32 - There are no Multiple Births']) 
+    return multipleBirths
+
+print(StoryIDUS32())
+        
+    
 #_____________Prateek's code_______________________________________________________________________________________________________________________
