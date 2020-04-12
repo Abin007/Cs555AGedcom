@@ -235,8 +235,6 @@
 2 SURN Kardashian
 2 _MARNM Kardashian
 1 SEX M
-1 BIRT
-2 DATE 2 FEB 2019
 1 FAMC @F4@
 0 @I25@ INDI
 1 NAME Nadia /Kardashian/
@@ -256,7 +254,7 @@
 1 BIRT
 2 DATE 4 APR 1970
 1 FAMC @F4@
-0 @I27@ INDI
+0 @I26@ INDI
 1 NAME Rick /Kardashian/
 2 GIVN Rick
 2 SURN Kardashian

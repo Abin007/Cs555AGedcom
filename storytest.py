@@ -9,7 +9,7 @@ class fooTest(unittest.TestCase):
 
     def test_story_us25(self):
         #us25=set()
-        self.assertEqual(validator.StoryIDUS25(),['US25 - Error : Individual I1 I16 might be the same  in Family F4'])
+        self.assertEqual(validator.StoryIDUS25(),['US25 - Error : Family F4 have children with same name and dob'])
 
     def test_story_us16(self):
         self.assertEqual(validator.StoryIDUS16(),['US16 - Error : Family F6 has male members with different last names'])
@@ -22,7 +22,13 @@ class fooTest(unittest.TestCase):
     
     def test_story_us21(self):
         self.assertEqual(validator.StoryIDUS21(),['US21 - Error : In Family F3 have parents of wrong gender', 'US21 - Error : In Family F6 have parents of wrong gender'])
-        
+
+    def test_story_us22(self):
+        self.assertEqual(validator.StoryIDUS22(),'US22 - Error : ID I26 are found to be not unique')
+
+    def test_story_us27(self):
+        self.assertEqual(validator.StoryIDUS27(),'US27 - Error : Individual I24 has no ages displayed')
+
     
     def test_story_us30(self):
         x = PrettyTable()
@@ -58,7 +64,7 @@ class fooTest(unittest.TestCase):
         x.add_row(['I24', 'Nathan /Kardashian/'])
         x.add_row(['I25', 'Nadia /Kardashian/'])
         x.add_row(['I26', 'Nathaniel /Kardashian/'])
-        x.add_row(['I27', 'Rick /Kardashian/'])
+        x.add_row(['I26', 'Rick /Kardashian/'])
         x.add_row(['I28', 'Hailey /Kardashian/'])
         self.assertEqual(str(validator.StoryIDUS31()), str(x))
         
