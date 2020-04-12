@@ -215,43 +215,30 @@ def StoryIDUS25():
                         row.border = False
                         row.header = False
                         if (row.get_string(fields=["ID"]).strip()) == match[j]:
-                            child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0].lower())
-                            dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
-                        
-            # family[i].pop()
-            # family[i]=family[i]+child
-            
+                            if((row.get_string(fields=["Birthday"]).strip())!='N/A'):
+                                child.append(row.get_string(fields=["Name"]).strip().replace('/','').split(" ")[0].lower())
+                                dob.append(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
             for k in range(0,len(child)):
-                for j in range(k+1, len(child)):
-                    if(child[k]==child[j]):
-                        if(dob[k]==dob[j]):
-                            # errors.append(match[k])
-                            # errors.append(match[j])
-                            indi=[]
-                            indi.append(match[k])
-                            indi.append(match[j])
-                            indi.sort()
-                            strindi=" ".join(indi)
-
-                            errors.append(f"US25 - Error : Individual {strindi} might be the same  in Family {i}")
-                            
-                    #     else:
-                    #         errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
-
+                for l in range(k+1,len(child)):
+                    if(child[k]==child[l]):
+                        if(dob[k]==dob[l]):
+                            errors.append(f"US25 - Error : Family {i} have children with same name and dob")
                     
+            # for k in range(0,len(child)):
+            #     for j in range(k+1, len(child)):
+            #         if(child[k]==child[j]):
+            #             print(child[k])
+            #             print(child[j])
+            #             if(dob[k]==dob[j]):
+            #                 indi=[]
+            #                 indi.append(match[k])
+            #                 indi.append(match[j])
+            #                 indi.sort()
+            #                 strindi=" ".join(indi)
 
-                    # elif(child[k]!=child[j]):
-                    #     if(dob[k]==dob[j]):
-                    #         errors.append(f"US Story US25 - Warning : Might be the same {match[k]} and {match[j]} in Family {i}")
-            
-
-    # error=0
-    # print(family)
-    # for i in family:
-    #     uniquefamily=list(set(family[i]))
-    #     if(len(family[i])!=len(uniquefamily)):
-    #         error=1
-    #         return(f"Error: family Id {i} has duplicate names")
+            #                 errors.append(f"US25 - Error : Individual {strindi} might be the same  in Family {i}")
+                            
+                 
     if(len(errors)==0):
         return ("US25 - No error detected.")
     else:
@@ -395,15 +382,33 @@ def StoryIDUS22():
         row.border = False
         row.header = False
         indiid.append(row.get_string(fields=["ID"]).strip().replace('/',''))
-    if(len(list(set(familyid)))!=len(familyid)):
-        errors.append("US22 - Error : Family IDs is not Unique") 
-    if(len(list(set(indiid)))!=len(indiid)):
-        errors.append("US22 - Error : Individual IDs is not Unique")
+    family={}
+    for i in familyid:
+        if( i in family.keys()):
+            family[i]=family[i]+1
+        else:
+            family[i]=0
+    
+    indi={}
+    for i in indiid:
+        if( i in indi.keys()):
+            indi[i]=indi[i]+1
+        else:
+            indi[i]=0
+    for i in indi:
+        if(indi[i]>0):
+            errors.append(i)
+    for i in family:
+        if(family[i]>0):
+            errors.append(i)
+    
+
     if errors:
-        return errors
+        str=" ".join(errors)
+        return f"US22 - Error : ID {str} are found to be not unique"
     else:
         return "US22 - No errors found"
-#print(StoryIDUS22())
+print(StoryIDUS22())
 #___________________________________________________________________________________________________
 
 def StoryIDUS27():
@@ -416,11 +421,12 @@ def StoryIDUS27():
             error.append(id)
     error=sorted(error)
     if error:
-        return f"US27 - Error : Individual {error} has no ages displayed"
+        str=" ".join(error)
+        return f"US27 - Error : Individual {str} has no ages displayed"
     else:
         return "US27 - No errors found"
 
-#print(StoryIDUS27())
+print(StoryIDUS27())
 
 
 #_________Tushar's storis_________________________________________________________________________________________________________________
@@ -686,13 +692,14 @@ def StoryIDUS38():
         row.border = False
         row.header = False
         if(row.get_string(fields=["Death"]).strip()=='N/A'):
-            birth=datetime.date(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
-            yy=date.today().year
-            birth=birth.replace(year=yy)
-            if((birth) <= pastDate and birth>=date.today() ):
-                id=(row.get_string(fields=["ID"]).strip().replace('/',''))
-                recentBirths.append(f"US38 - Individual - {id} have Birthdays in the next 30 days-{birth} ")
-            
+            if((row.get_string(fields=["Birthday"]).strip())!='N/A'):
+                birth=datetime.date(datetime.strptime((row.get_string(fields=["Birthday"]).strip()), '%d %b %Y'))
+                yy=date.today().year
+                birth=birth.replace(year=yy)
+                if((birth) <= pastDate and birth>=date.today() ):
+                    id=(row.get_string(fields=["ID"]).strip().replace('/',''))
+                    recentBirths.append(f"US38 - Individual - {id} have Birthdays in the next 30 days-{birth} ")
+                
     if recentBirths:
         return recentBirths
     else:
