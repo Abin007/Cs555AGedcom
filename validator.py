@@ -588,6 +588,23 @@ def StoryIDUS06():
         return "US06 - No errors found "
 print(StoryIDUS06())
 
+def StoryIDUS07():
+    errors=[]
+    for row3 in x:
+        row3.border = False
+        row3.header = False
+        id = (row3.get_string(fields = ["ID"]).strip().replace('/',''))
+        if((row3.get_string(fields = ["Age"]).strip()) != 'N/A'):
+            age = int((row3.get_string(fields = ["Age"]).strip()))
+            if(age >= 150):
+                errors.append(id)
+            
+    if(len(errors) != 0):
+        strerror=" ".join(errors)
+        return f'US07 - Error : Individual - {strerror} have age more than 150 years old'
+    else:
+        return "US07 - No errors found "
+print(StoryIDUS07())
 #___________________________________________________________________________________________________________________________________________
 
 

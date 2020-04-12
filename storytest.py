@@ -91,6 +91,9 @@ class fooTest(unittest.TestCase):
     def test_story_us06(self):
         self.assertEqual(validator.StoryIDUS06(),'US06 - Error : Individual - I3 have death before divorce')
 
+    def test_story_us07(self):
+        self.assertEqual(validator.StoryIDUS07(),'US07 - Error : Individual - I8 have age more than 150 years old')
+
     def test_story_us35(self):
         self.assertEqual(validator.StoryIDUS35(),['US35 - Error : Individual - I18 Birthday 30 MAR 2020 is born recently'])
     
