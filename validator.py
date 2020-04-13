@@ -618,17 +618,18 @@ def StoryIDUS10():
         row3.border = False
         row3.header = False
         if((row3.get_string(fields = ["Married"]).strip()) != 'N/A'):
-                marriage = (datetime.strptime((row3.get_string(fields = ["Married"]).strip()), '%d %b %Y'))
-                husid = (row3.get_string(fields = ["Husband ID"])).strip()
-                wifeid = (row3.get_string(fields = ["Wife ID"])).strip()
-                for row3 in x:
-                    row3.border = False
-                    row3.header = False
-                    if((row3.get_string(fields = ["Birthday"]).strip()) != 'N/A'):    
-                        birthday = (datetime.strptime((row3.get_string(fields = ["Birthday"]).strip()), '%d %b %Y'))
-                        marriageage = int(marriage.year - birthday.year - ((marriage.month, marriage.day) < (birthday.month, birthday.day)))
-                if(marriageage < 14):
-                     errors.append(husid) or errors.append(wifeid)               
+            marriage = (datetime.strptime((row3.get_string(fields = ["Married"]).strip()), '%d %b %Y'))
+            husid = (row3.get_string(fields = ["Husband ID"])).strip()
+            wifeid = (row3.get_string(fields = ["Wife ID"])).strip()
+            for row2 in x:
+                row2.border = False
+                row2.header = False
+                id = (row2.get_string(fields = ["ID"]).strip().replace('/',''))
+                if(husid==id or wifeid==id ):   
+                    birthday = (datetime.strptime((row2.get_string(fields = ["Birthday"]).strip()), '%d %b %Y'))
+                    marriageage = int(marriage.year - birthday.year - ((marriage.month, marriage.day) < (birthday.month, birthday.day)))
+                    if(marriageage < 14):
+                        errors.append(id)                
     
     if(len(errors) != 0):
         strerror=" ".join(errors)
@@ -636,8 +637,6 @@ def StoryIDUS10():
     else:
         return "US07 - No errors found "
 print(StoryIDUS10())
-
-
 #___________________________________________________________________________________________________________________________________________
 
 
