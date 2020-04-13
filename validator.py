@@ -635,7 +635,7 @@ def StoryIDUS10():
         strerror=" ".join(errors)
         return f'US10 - Error : Individual - {strerror} have been married before 14 years old'
     else:
-        return "US07 - No errors found "
+        return "US10 - No errors found "
 print(StoryIDUS10())
 #___________________________________________________________________________________________________________________________________________
 
