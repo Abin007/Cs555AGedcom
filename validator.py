@@ -611,6 +611,33 @@ def StoryIDUS07():
     else:
         return "US07 - No errors found "
 print(StoryIDUS07())
+
+def StoryIDUS10():
+    errors=[]
+    for row3 in y:
+        row3.border = False
+        row3.header = False
+        if((row3.get_string(fields = ["Married"]).strip()) != 'N/A'):
+                marriage = (datetime.strptime((row3.get_string(fields = ["Married"]).strip()), '%d %b %Y'))
+                husid = (row3.get_string(fields = ["Husband ID"])).strip()
+                wifeid = (row3.get_string(fields = ["Wife ID"])).strip()
+                for row3 in x:
+                    row3.border = False
+                    row3.header = False
+                    if((row3.get_string(fields = ["Birthday"]).strip()) != 'N/A'):    
+                        birthday = (datetime.strptime((row3.get_string(fields = ["Birthday"]).strip()), '%d %b %Y'))
+                        marriageage = int(marriage.year - birthday.year - ((marriage.month, marriage.day) < (birthday.month, birthday.day)))
+                if(marriageage < 14):
+                     errors.append(husid) or errors.append(wifeid)               
+    
+    if(len(errors) != 0):
+        strerror=" ".join(errors)
+        return f'US10 - Error : Individual - {strerror} have been married before 14 years old'
+    else:
+        return "US07 - No errors found "
+print(StoryIDUS10())
+
+
 #___________________________________________________________________________________________________________________________________________
 
 
