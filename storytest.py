@@ -120,6 +120,9 @@ class fooTest(unittest.TestCase):
     
     def test_story_us42(self):
         self.assertEqual(validator.StoryIDUS42(),['US42 - There are no Illegitimate Dates'])
+    
+    def test_story_us33(self):
+        self.assertEqual(validator.StoryIDUS33(),['US33 - There are no orphans'])
 
 
         
