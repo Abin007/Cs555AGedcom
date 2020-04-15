@@ -854,9 +854,36 @@ def StoryIDUS32():
         return multipleBirths
     else:
         return(['US32 - There are no Multiple Births']) 
-    return multipleBirths
+    
 
 print(StoryIDUS32())
-        
+
+def StoryIDUS33():
+    orphans = []
+    for row in x:
+        row.border = False
+        row.header = False
+        if(row.get_string(fields=["Age"]).strip()<='18' and row.get_string(fields=["Age"]).strip()>'0'):
+            family_id = row.get_string(fields=["Child"]).strip()[2:4]
+            child = row.get_string(fields=["Name"]).strip()
+            for row1 in y:
+                row1.border = False
+                row1.header = False
+                if(row1.get_string(fields=["ID"]).strip() == family_id):
+                    hid = row1.get_string(fields=["Husband ID"]).strip()
+                    wid = row1.get_string(fields=["Wife ID"]).strip()
+                    for row2 in x:
+                        row2.border = False
+                        row2.header = False
+                        if(row2.get_string(fields=["ID"]).strip()==hid or row2.get_string(fields=["ID"]).strip() == wid):
+                            if(row2.get_string(fields=["Alive"]).strip()==False):
+                                orphans.append(f"US33 - Child Name - {child} is an Orphan.")
     
+    if orphans:
+        return orphans
+    else:
+        return (['US33 - There are no orphans'])
+        
+print(StoryIDUS33())
+
 #_____________Prateek's code_______________________________________________________________________________________________________________________
