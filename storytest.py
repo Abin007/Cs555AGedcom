@@ -34,7 +34,6 @@ class fooTest(unittest.TestCase):
         x = PrettyTable()
         x.field_names = ['Husband ID', 'Husband Name', 'Wife ID', 'Wife Name']
         x.add_row(['I2', 'Kanye /West/', 'I1', 'Kim /Kardashian/'])
-        x.add_row(['I7', 'Bruce /Jenner/', 'I6', 'Kris /Jenner/'])
         x.add_row(['I13', 'Travis /Scott/', 'I14', 'Stormi /Webster/'])
         self.assertEqual(str(validator.StoryIDUS30()), str(x))
         y = PrettyTable()
@@ -113,7 +112,7 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS38(),['US38 - Individual - I9 have Birthdays in the next 30 days-2020-04-18 ', 'US38 - Individual - I13 have Birthdays in the next 30 days-2020-04-20 ', 'US38 - Individual - I19 have Birthdays in the next 30 days-2020-05-02 '])
 
     def test_story_us39(self):
-        self.assertEqual(validator.StoryIDUS39(),['US39 - Couple - I7,I6 have anniversaries in the next 30 days', 'US39 - Couple - I13,I14 have anniversaries in the next 30 days'])
+        self.assertEqual(validator.StoryIDUS39(),['US39 - Couple - I13,I14 have anniversaries in the next 30 days'])
             
     def test_story_us32(self):
         self.assertEqual(validator.StoryIDUS32(),['US32 - Multiple Births - 21 OCT 1980 is a multiple birthdate.'])
@@ -122,7 +121,7 @@ class fooTest(unittest.TestCase):
         self.assertEqual(validator.StoryIDUS42(),['US42 - There are no Illegitimate Dates'])
     
     def test_story_us33(self):
-        self.assertEqual(validator.StoryIDUS33(),['US33 - There are no orphans'])
+        self.assertEqual(validator.StoryIDUS33(),['US33 - Child Name - Rob /Kardashian/ is an Orphan.', 'US33 - Child Name - Krit /Kardashian/ is an Orphan.', 'US33 - Child Name - Brian /Kardashian/ is an Orphan.'])
 
 
         
