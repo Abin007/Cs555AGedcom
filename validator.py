@@ -863,7 +863,7 @@ def StoryIDUS33():
     for row in x:
         row.border = False
         row.header = False
-        if(row.get_string(fields=["Age"]).strip()<='18' and row.get_string(fields=["Age"]).strip()>'0'):
+        if(row.get_string(fields=["Age"]).strip()!='N/A' and int(row.get_string(fields=["Age"]).strip())<=18 and int(row.get_string(fields=["Age"]).strip())>0 ):
             family_id = row.get_string(fields=["Child"]).strip()[2:4]
             child = row.get_string(fields=["Name"]).strip()
             for row1 in y:
@@ -875,10 +875,13 @@ def StoryIDUS33():
                     for row2 in x:
                         row2.border = False
                         row2.header = False
-                        if(row2.get_string(fields=["ID"]).strip()==hid or row2.get_string(fields=["ID"]).strip() == wid):
-                            if(row2.get_string(fields=["Alive"]).strip()==False):
-                                orphans.append(f"US33 - Child Name - {child} is an Orphan.")
-    
+                        flag = 0
+                        if(row2.get_string(fields=["ID"]).strip()==hid and row2.get_string(fields=["Alive"]).strip()=='False'):
+                            flag+=1
+                        elif(row2.get_string(fields=["ID"]).strip() == wid and row2.get_string(fields=["Alive"]).strip()=='False'):
+                            flag+=1
+                        if(flag==2):
+                            orphans.append(f"US33 - Child Name - {child} is an Orphan.")
     if orphans:
         return orphans
     else:
