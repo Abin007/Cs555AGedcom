@@ -872,15 +872,15 @@ def StoryIDUS33():
                 if(row1.get_string(fields=["ID"]).strip() == family_id):
                     hid = row1.get_string(fields=["Husband ID"]).strip()
                     wid = row1.get_string(fields=["Wife ID"]).strip()
+                    flag = 0
                     for row2 in x:
                         row2.border = False
                         row2.header = False
-                        flag = 0
                         if(row2.get_string(fields=["ID"]).strip()==hid and row2.get_string(fields=["Alive"]).strip()=='False'):
                             flag+=1
                         elif(row2.get_string(fields=["ID"]).strip() == wid and row2.get_string(fields=["Alive"]).strip()=='False'):
                             flag+=1
-                        if(flag==2):
+                    if(flag==2):
                             orphans.append(f"US33 - Child Name - {child} is an Orphan.")
     if orphans:
         return orphans
