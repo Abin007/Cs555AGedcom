@@ -8,7 +8,7 @@ Flask-SQLAlchemy==2.4.0
 geographiclib==1.50
 geopy==1.20.0
 gunicorn==19.9.0
-ipython==7.9.0
+ipython==7.16.3
 ipython-genutils==0.2.0
 isort==4.3.21
 itsdangerous==1.1.0
